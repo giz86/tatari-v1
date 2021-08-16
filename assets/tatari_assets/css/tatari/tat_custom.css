@@ -285,10 +285,10 @@ ul.list-inline li {
 	padding: 14px 15px !important;
 }
 #header_wrapper.ecom-header {
-    background-image: url(../../../images/1.jpg)!important;
-    height: 220px;
+    background-image: url(../../../images/2.jpg)!important;
+    height: 270px;
     min-height: 220px;
-    max-height: 220px;
+    max-height: 270px;
     padding: 25px;
     background-size: cover;
     background-position: 0 45%!important;

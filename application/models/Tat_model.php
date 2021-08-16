@@ -1,6 +1,6 @@
 <?php
-	// Tar Model -  main Tatari model for overall base operations
-class Tat_model extends CI_Model {
+	// Tat Model -  main Tatari model for overall base operations HR & Finance
+	class Tat_model extends CI_Model {
  
     public function __construct()
     {
@@ -99,9 +99,6 @@ class Tat_model extends CI_Model {
   	  return $query->result();
 	}
 	
-	
-
-
 	public function read_user_info_byemail($email) {
 	
 		$sql = 'SELECT * FROM tat_employees WHERE email = ?';
@@ -119,7 +116,6 @@ class Tat_model extends CI_Model {
 		
 		return $query;
 	}
-	
 	
 	public function read_employee_info($id) {
 	
@@ -374,35 +370,29 @@ class Tat_model extends CI_Model {
 
 	public function system_layout() {
 	
-		// get details of layout
 		$system = $this->read_setting_info(1);
 		
 		if($system[0]->compact_sidebar!=''){
-			// if compact sidebar
 			$compact_sidebar = 'compact-sidebar';
 		} else {
 			$compact_sidebar = '';
 		}
 		if($system[0]->fixed_header!=''){
-			// if fixed header
 			$fixed_header = 'fixed-header';
 		} else {
 			$fixed_header = '';
 		}
 		if($system[0]->fixed_sidebar!=''){
-			// if fixed sidebar
 			$fixed_sidebar = 'fixed-sidebar';
 		} else {
 			$fixed_sidebar = '';
 		}
 		if($system[0]->boxed_wrapper!=''){
-			// if boxed wrapper
 			$boxed_wrapper = 'boxed-wrapper';
 		} else {
 			$boxed_wrapper = '';
 		}
 		if($system[0]->layout_static!=''){
-			// if static layout
 			$static = 'static';
 		} else {
 			$static = '';
@@ -462,9 +452,9 @@ class Tat_model extends CI_Model {
 
 	public function set_date_format($date) {
 		
-		// get details
+	
 		$system_setting = $this->read_setting_info(1);
-		// date formate
+	
 		if($system_setting[0]->date_format_xi=='d-m-Y'){
 			$d_format = date("d-m-Y", strtotime($date));
 		} else if($system_setting[0]->date_format_xi=='m-d-Y'){
@@ -491,11 +481,10 @@ class Tat_model extends CI_Model {
 
 	public function currency_sign($number) {
 		
-
 		$system_setting = $this->read_setting_info(1);
 		$default_locale = 'en_US';
 		setlocale(LC_MONETARY, $default_locale);
-		// currency code/symbol
+		
 		if($system_setting[0]->show_currency=='code'){
 			$ar_sc = explode(' -',$system_setting[0]->default_currency_symbol);
 			$sc_show = $ar_sc[0];
@@ -603,9 +592,7 @@ class Tat_model extends CI_Model {
 
 	public function set_date_format_js() {
 		
-		// get details
 		$system_setting = $this->read_setting_info(1);
-		// date format
 		if($system_setting[0]->date_format_xi=='d-m-Y'){
 			$d_format = 'dd-mm-yy';
 		} else if($system_setting[0]->date_format_xi=='m-d-Y'){
@@ -620,7 +607,6 @@ class Tat_model extends CI_Model {
 	}
 
 	public function read_country_info($id) {
-	
 		$sql = 'SELECT * FROM tat_countries WHERE country_id = ?';
 		$binds = array($id);
 		$query = $this->db->query($sql, $binds);
@@ -698,6 +684,38 @@ class Tat_model extends CI_Model {
 			$arr['term_active'] = 'active';
 			$arr['emp_open'] = 'active';
 			return $arr;
+		}  else if($mClass=='attendance' && $mMethod=='attendance') {
+			$arr['attnd_active'] = 'active';
+			$arr['attnd_open'] = 'active';
+			return $arr;
+		}  else if($mMethod=='date_wise_attendance') {
+			$arr['dtwise_attnd_active'] = 'active';
+			$arr['attnd_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='update_attendance') {
+			$arr['upd_attnd_active'] = 'active';
+			$arr['attnd_open'] = 'active';
+			return $arr;
+		} else if($mClass=='overtime_request') {
+			$arr['overtime_request_act'] = 'active';
+			$arr['attnd_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='office_shift' && $mClass=='attendance') {
+			$arr['offsh_active'] = 'active';
+			$arr['attnd_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='leave' && $mClass=='attendance') {
+			$arr['leave_active'] = 'active';
+			$arr['attnd_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='leave_details' && $mClass=='attendance') {
+			$arr['leave_active'] = 'active';
+			$arr['attnd_open'] = 'active';
+			return $arr;
+		} else if($mClass=='attendance' && $mMethod=='index') {
+			$arr['attendance_active'] = 'active';
+			$arr['attnd_open'] = 'active';
+			return $arr;
 		} else if($mClass=='employees_last_login') {
 			$arr['emp_ll_active'] = 'active';
 			$arr['stff_open'] = 'active';
@@ -707,12 +725,20 @@ class Tat_model extends CI_Model {
 		
 	}
 
+	public function read_user_attendance_info() {
+		
+		$sql = 'SELECT * FROM tat_employees WHERE user_id = ?';
+		$binds = array('000');
+		$query = $this->db->query($sql, $binds);
+		
+		return $query;	
+	}
+
 	public function clean_post($post_name) {
 		$name = trim($post_name);
 		$Evalue = array('-','alert','<script>','</script>','</php>','<php>','<p>','\r\n','\n','\r','=',"'",'/','cmd','!',"('","')", '|');
 		$post_name = str_replace($Evalue, '', $name); 
 		$post_name = preg_replace('/^(\d{1,2}[^0-9])/m', '', $post_name);
-	   // $post_name = htmlspecialchars(trim($post_name), ENT_QUOTES, "UTF-8");
 		
 		return $post_name;
 	 }
@@ -729,6 +755,52 @@ class Tat_model extends CI_Model {
 	 public function form_button_class() {
 		 return 'btn btn-primary';
 	 }
+
+
+	 public function convertNumberToWord($num = false) {
+		$num = str_replace(array(',', ' '), '' , trim($num));
+		if(! $num) {
+			return false;
+		}
+		$num = (int) $num;
+		$words = array();
+		$list1 = array('', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven',
+			'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
+		);
+		$list2 = array('', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety', 'hundred');
+		$list3 = array('', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillion'
+		);
+		$num_length = strlen($num);
+		$levels = (int) (($num_length + 2) / 3);
+		$max_length = $levels * 3;
+		$num = substr('00' . $num, -$max_length);
+		$num_levels = str_split($num, 3);
+		for ($i = 0; $i < count($num_levels); $i++) {
+			$levels--;
+			$hundreds = (int) ($num_levels[$i] / 100);
+			$hundreds = ($hundreds ? ' ' . $list1[$hundreds] . ' hundred' . ' ' : '');
+			$tens = (int) ($num_levels[$i] % 100);
+			$singles = '';
+			if ( $tens < 20 ) {
+				$tens = ($tens ? ' ' . $list1[$tens] . ' ' : '' );
+			} else {
+				$tens = (int)($tens / 10);
+				$tens = ' ' . $list2[$tens] . ' ';
+				$singles = (int) ($num_levels[$i] % 10);
+				$singles = ' ' . $list1[$singles] . ' ';
+			}
+			$words[] = $hundreds . $tens . $singles . ( ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . $list3[$levels] . ' ' : '' );
+		} //end for loop
+		$commas = count($words);
+		if ($commas > 1) {
+			$commas = $commas - 1;
+		}
+		return implode(' ', $words);
+	}
+
+	 public function get_job_type() {
+		return  $query = $this->db->query("SELECT * from tat_job_type");
+   }
  
 	 public function validate_date($dateStr, $format)
 	 {

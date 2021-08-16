@@ -2,6 +2,7 @@
 /* Employee Details view
 */
 ?>
+
 <?php $session = $this->session->userdata('username');?>
 <?php $system = $this->Tat_model->read_setting_info(1);?>
 <?php //$default_currency = $this->Tat_model->read_currency_con_info($system[0]->default_currency_id);?>
@@ -16,23 +17,33 @@ $leave_user = $this->Tat_model->read_user_info($eid);
 ?>
 <?php $get_animate = $this->Tat_model->get_content_animate();?>
 <?php 
-// $leave_categories_ids = explode(',',$leave_categories);
+      $leave_categories_ids = explode(',',$leave_categories);
 ?>
-<?php $view_companies_ids = explode(',',$view_companies_id);?>
+<?php 
+
+// $view_companies_ids = explode(',',$view_companies_id);
+?>
 <?php $user_info = $this->Tat_model->read_user_info($session['user_id']);?>
 <?php $role_resources_ids = $this->Tat_model->user_role_resource(); ?>
+
+
 <div class="row">
   <div class="col-md-12">
     <div class="nav-tabs-custom mb-4">
+
+
       <ul class="nav nav-tabs">
-        <li class="nav-item active"> <a class="nav-link active show" data-toggle="tab" href="#tat_general">General</a> </li>
-        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tat_profile_picture">Profile Picture</a> </li>
-        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="">Tab 3</a> </li>
-        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="">Tab 4</a> </li>
-        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="">Tab 5</a> </li>
-        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="">Tab 6</a> </li>
-        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="">Tab 7</a> </li>      
+        <li class="nav-item active"> <a class="nav-link active show" data-toggle="tab" href="#tat_general"><?php echo $this->lang->line('tat_general');?></a> </li>
+        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tat_core_hr"><?php echo $this->lang->line('tat_hr');?></a> </li>
+        <?php if(in_array('351',$role_resources_ids)) {?>
+        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tat_employee_set_salary"><?php echo $this->lang->line('tat_employee_set_salary');?></a> </li>
+        <?php }?>
+        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tat_leaves"><?php echo $this->lang->line('left_leaves');?></a> </li>
+        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tat_payslips"><?php echo $this->lang->line('left_payslips');?></a> </li>  
+        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tat_profile_picture"><?php echo $this->lang->line('tat_e_details_profile_picture');?></a> </li>     
      </ul>
+
+
       <div class="tab-content">
         <div class="tab-pane <?php echo $get_animate;?> active" id="tat_general">
           <div class="card-body">
@@ -44,14 +55,18 @@ $leave_user = $this->Tat_model->read_user_info($eid);
               
                    <a class="list-group-item list-group-item-action nav-tabs-link" data-toggle="list" href="javascript:void(0);" data-profile="3" data-profile-block="contacts" aria-expanded="true" id="user_profile_3"><?php echo $this->lang->line('tat_employee_emergency_contacts');?></a> 
 
+                   <a class="list-group-item list-group-item-action nav-tabs-link" data-toggle="list" href="javascript:void(0);" data-profile="6" data-profile-block="qualification" aria-expanded="true" id="user_profile_6"><?php echo $this->lang->line('tat_e_details_qualification');?></a>
+                   
+                   <a class="list-group-item list-group-item-action nav-tabs-link" data-toggle="list" href="javascript:void(0);" data-profile="7" data-profile-block="work-experience" aria-expanded="true" id="user_profile_7"><?php echo $this->lang->line('tat_e_details_w_experience');?></a>
+                   
+                   <a class="list-group-item list-group-item-action nav-tabs-link" data-toggle="list" href="javascript:void(0);" data-profile="8" data-profile-block="bank-account" aria-expanded="true" id="user_profile_8"><?php echo $this->lang->line('tat_e_details_baccount');?></a>
+                   
+                   <a class="list-group-item list-group-item-action nav-tabs-link" data-toggle="list" href="javascript:void(0);" data-profile="5" data-profile-block="documents" aria-expanded="true" id="user_profile_5"><?php echo $this->lang->line('tat_e_details_document');?></a> 
+                   
                    <a class="list-group-item list-group-item-action nav-tabs-link" data-toggle="list" href="javascript:void(0);" data-profile="9" data-profile-block="change-password" aria-expanded="true" id="user_profile_9"><?php echo $this->lang->line('tat_e_details_cpassword');?></a>
 
-                   <a class="list-group-item list-group-item-action nav-tabs-link" data-toggle="list" href="javascript:void(0);" data-profile="5" data-profile-block="" aria-expanded="true" id="user_profile_5">Item 4</a>
-                    <a class="list-group-item list-group-item-action nav-tabs-link" data-toggle="list" href="javascript:void(0);" data-profile="6" data-profile-block="" aria-expanded="true" id="user_profile_6">Item 5</a> 
-                    <a class="list-group-item list-group-item-action nav-tabs-link" data-toggle="list" href="javascript:void(0);" data-profile="7" data-profile-block="" aria-expanded="true" id="user_profile_7">Item 6</a> 
-                    <a class="list-group-item list-group-item-action nav-tabs-link" data-toggle="list" href="javascript:void(0);" data-profile="8" data-profile-block="" aria-expanded="true" id="user_profile_8">Item 7</a>
-                     <a class="list-group-item list-group-item-action nav-tabs-link" data-toggle="list" href="javascript:void(0);" data-profile="12" data-profile-block="" aria-expanded="true" id="user_profile_12">Item 8</a>
-                     <a  class="list-group-item list-group-item-action nav-tabs-link" data-toggle="list" href="javascript:void(0);" data-profile="13" data-profile-block="" aria-expanded="true" id="user_profile_13">Item 9 </a> </div>
+
+                 </div>
                 </div>
                 <div class="col-md-9">
                   <div class="tab-content">
@@ -136,7 +151,6 @@ $leave_user = $this->Tat_model->read_user_info($eid);
                                 $colmd=4;
                                 $is_id= 'is_aj_subdepartments';
                               }?>
-                            <?php //$eall_departments = $this->Company_model->ajax_company_departments_info($company_id);?>
                             <?php $el_result = $this->Department_model->ajax_company_location_information($company_id);?>
                             <?php $eall_departments = $this->Department_model->ajax_location_departments_information($location_id);?>
                             <div class="col-md-4" id="location_ajax">
@@ -251,13 +265,16 @@ $leave_user = $this->Tat_model->read_user_info($eid);
                               </div>
                             </div>
                           </div>
+
                           <div class="row">
+
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="contact_no" class="control-label"><?php echo $this->lang->line('tat_contact_number');?><i class="tatari-asterisk">*</i></label>
                                 <input class="form-control" placeholder="<?php echo $this->lang->line('tat_contact_number');?>" name="contact_no" type="text" value="<?php echo $contact_no;?>">
                               </div>
                             </div>
+
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="status" class="control-label"><?php echo $this->lang->line('dashboard_tat_status');?></label>
@@ -267,40 +284,73 @@ $leave_user = $this->Tat_model->read_user_info($eid);
                                 </select>
                               </div>
                             </div>
-                        
+
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="office_shift_id" class="control-label"><?php echo $this->lang->line('tat_employee_office_shift');?></label>
+                                <select class="form-control" name="office_shift_id" data-plugin="select_tat" data-placeholder="<?php echo $this->lang->line('tat_employee_office_shift');?>">
+                                  <?php foreach($all_office_shifts as $shift) {?>
+                                  <option value="<?php echo $shift->office_shift_id?>" <?php if($office_shift_id == $shift->office_shift_id):?> selected="selected" <?php endif; ?>><?php echo $shift->shift_name?></option>
+                                  <?php } ?>
+                                </select>
+                              </div>
+                            </div>
+
                           </div>
+
                           <div class="row">
+
                           	<div class="col-md-4">
                               <div class="form-group">
                                 <label for="date_of_birth"><?php echo $this->lang->line('tat_employee_dob');?><i class="tatari-asterisk">*</i></label>
                                 <input class="form-control date" readonly placeholder="<?php echo $this->lang->line('tat_employee_dob');?>" name="date_of_birth" type="text" value="<?php echo $date_of_birth;?>">
                               </div>
                             </div>
-                          </div>
+
+                          <div class="col-md-8">
+                              <div class="form-group">
+                                <label for="tat_hr_leave_cat"><?php echo $this->lang->line('tat_hr_leave_cat');?></label>
+                                <input type="hidden" name="leave_categories[]" value="0" />
+                                <select multiple="multiple" class="form-control" name="leave_categories[]" data-plugin="select_tat" data-placeholder="<?php echo $this->lang->line('tat_hr_leave_cat');?>">
+                                  <?php foreach($all_leave_types as $leave_type) {?>
+                                  <option value="<?php echo $leave_type->leave_type_id?>" <?php if(isset($_GET)) { if(in_array($leave_type->leave_type_id,$leave_categories_ids)):?> selected <?php endif; }?>><?php echo $leave_type->type_name?></option>
+                                  <?php } ?>
+                                </select>
+                              </div>
+                            </div>
+                                 
+                         </div>
 
                             <div class="row">
+
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="estate"><?php echo $this->lang->line('tat_state');?></label>
                                 <input class="form-control" placeholder="<?php echo $this->lang->line('tat_state');?>" name="estate" type="text" value="<?php echo $state;?>">
                               </div>
                             </div>
+
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="ecity"><?php echo $this->lang->line('tat_city');?></label>
                                 <input class="form-control" placeholder="<?php echo $this->lang->line('tat_city');?>" name="ecity" type="text" value="<?php echo $city;?>">
                               </div>
                             </div>
+
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="ezipcode" class="control-label"><?php echo $this->lang->line('tat_zipcode');?></label>
                                 <input class="form-control" placeholder="<?php echo $this->lang->line('tat_zipcode');?>" name="ezipcode" type="text" value="<?php echo $zipcode;?>">
                               </div>
                             </div>
+
                           </div>
+     
+                        
+                                 
 
                           <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                               <div class="form-group">
                                 <label for="address"><?php echo $this->lang->line('tat_employee_address');?></label>
                                 <input type="text" class="form-control" placeholder="<?php echo $this->lang->line('tat_employee_address');?>" name="address" value="<?php echo $address;?>" />
@@ -312,13 +362,13 @@ $leave_user = $this->Tat_model->read_user_info($eid);
                           <div class="row">
                             <?php foreach($module_attributes as $mattribute):?>
                             <?php $attribute_info = $this->Custom_fields_model->get_employee_custom_data($user_id,$mattribute->custom_field_id);?>
-                            <?php
-								if(!is_null($attribute_info)){
-									$attr_val = $attribute_info->attribute_value;
-								} else {
-									$attr_val = '';
-								}
-							?>
+                                              <?php
+                                  if(!is_null($attribute_info)){
+                                    $attr_val = $attribute_info->attribute_value;
+                                  } else {
+                                    $attr_val = '';
+                                  }
+                                ?>
                             <?php if($mattribute->attribute_type == 'date'){?>
                             <div class="col-md-4">
                               <div class="form-group">
@@ -433,7 +483,6 @@ $leave_user = $this->Tat_model->read_user_info($eid);
                                 <option value="Spouse"><?php echo $this->lang->line('tat_spouse');?></option>
                                 <option value="Child"><?php echo $this->lang->line('tat_child');?></option>
                                 <option value="Sibling"><?php echo $this->lang->line('tat_sibling');?></option>
-                                <option value="In Laws"><?php echo $this->lang->line('tat_in_laws');?></option>
                               </select>
                             </div>
                           </div>
@@ -481,11 +530,8 @@ $leave_user = $this->Tat_model->read_user_info($eid);
                             <div class="form-group">
                               <label for="work_phone"><?php echo $this->lang->line('tat_phone');?><i class="tatari-asterisk">*</i></label>
                               <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                   <input class="form-control" placeholder="<?php echo $this->lang->line('tat_e_details_work');?>" name="work_phone" type="text">
-                                </div>
-                                <div class="col-md-4">
-                                  <input class="form-control" placeholder="<?php echo $this->lang->line('tat_e_details_phone_ext');?>" name="work_phone_extension" type="text">
                                 </div>
                               </div>
                             </div>
@@ -539,6 +585,378 @@ $leave_user = $this->Tat_model->read_user_info($eid);
                         <?php echo form_close(); ?> </div>
                     </div>
                    
+                   
+                   
+
+                    <div class="tab-pane current-tab <?php echo $get_animate;?>" id="documents" style="display:none;">
+                      <div class="box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('tat_e_details_documents');?> </h3>
+                        </div>
+                        <div class="box-body">
+                          <div class="box-datatable table-responsive">
+                            <table class="table table-striped table-bordered dataTable" id="tat_table_document" style="width:100%;">
+                              <thead>
+                                <tr>
+                                  <th><?php echo $this->lang->line('tat_action');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_dtype');?></th>
+                                  <th><?php echo $this->lang->line('dashboard_tat_title');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_doe');?></th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_add_new');?> <?php echo $this->lang->line('tat_e_details_document');?> </h3>
+                      </div>
+                      <div class="box-body pb-2">
+                        <?php $attributes = array('name' => 'document_info', 'id' => 'document_info', 'autocomplete' => 'off');?>
+                        <?php $hidden = array('u_document_info' => 'UPDATE');?>
+                        <?php echo form_open_multipart('admin/employees/document_info', $attributes, $hidden);?>
+                        <?php
+                                $data_usr2 = array(
+                                  'type'  => 'hidden',
+                                  'name'  => 'user_id',
+                                  'value' => $user_id,
+                              );
+                              echo form_input($data_usr2);
+                              ?>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="relation"><?php echo $this->lang->line('tat_e_details_dtype');?><i class="tatari-asterisk">*</i></label>
+                              <select name="document_type_id" id="document_type_id" class="form-control" data-plugin="select_tat" data-placeholder="<?php echo $this->lang->line('tat_e_details_choose_dtype');?>">
+                                <option value=""></option>
+                                <?php foreach($all_document_types as $document_type) {?>
+                                <option value="<?php echo $document_type->document_type_id;?>"> <?php echo $document_type->document_type;?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="date_of_expiry" class="control-label"><?php echo $this->lang->line('tat_e_details_doe');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control date" readonly placeholder="<?php echo $this->lang->line('tat_e_details_doe');?>" name="date_of_expiry" type="text">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="title" class="control-label"><?php echo $this->lang->line('tat_e_details_dtitle');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_e_details_dtitle');?>" name="title" type="text">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="description" class="control-label"><?php echo $this->lang->line('tat_description');?></label>
+                              <textarea class="form-control" placeholder="<?php echo $this->lang->line('tat_description');?>" data-show-counter="1" data-limit="300" name="description" cols="30" rows="3" id="d_description"></textarea>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <fieldset class="form-group">
+                                <label for="logo"><?php echo $this->lang->line('tat_e_details_document_file');?></label>
+                                <input type="file" class="form-control-file" id="document_file" name="document_file">
+                                <small><?php echo $this->lang->line('tat_e_details_d_type_file');?></small>
+                              </fieldset>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="form-actions"> <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_save'))); ?> </div>
+                            </div>
+                          </div>
+                        </div>
+                        <?php echo form_close(); ?> </div>
+                                </div>
+
+                        <div class="tab-pane current-tab <?php echo $get_animate;?>" id="qualification" style="display:none;">
+                      <div class="box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('tat_e_details_qualification');?> </h3>
+                        </div>
+                        <div class="box-body">
+                          <div class="box-datatable table-responsive">
+                            <table class="table table-striped table-bordered dataTable" id="tat_table_qualification" style="width:100%;">
+                              <thead>
+                                <tr>
+                                  <th><?php echo $this->lang->line('tat_action');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_inst_name');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_timeperiod');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_edu_level');?></th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_add_new');?> <?php echo $this->lang->line('tat_e_details_qualification');?> </h3>
+                      </div>
+                      <div class="box-body pb-2">
+                        <?php $attributes = array('name' => 'qualification_info', 'id' => 'qualification_info', 'autocomplete' => 'off');?>
+                        <?php $hidden = array('u_basic_info' => 'UPDATE');?>
+                        <?php echo form_open('admin/employees/qualification_info', $attributes, $hidden);?>
+                        <?php
+						  $data_usr3 = array(
+								'type'  => 'hidden',
+								'name'  => 'user_id',
+								'value' => $user_id,
+						 );
+						echo form_input($data_usr3);
+					  ?>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="name"><?php echo $this->lang->line('tat_e_details_inst_name');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_e_details_inst_name');?>" name="name" type="text">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="education_level" class="control-label"><?php echo $this->lang->line('tat_e_details_edu_level');?></label>
+                              <select class="form-control" name="education_level" data-plugin="select_tat" data-placeholder="<?php echo $this->lang->line('tat_e_details_edu_level');?>">
+                                <?php foreach($all_education_level as $education_level) {?>
+                                <option value="<?php echo $education_level->education_level_id?>"><?php echo $education_level->name?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="from_year" class="control-label"><?php echo $this->lang->line('tat_e_details_timeperiod');?><i class="tatari-asterisk">*</i></label>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <input class="form-control date" readonly="readonly" placeholder="<?php echo $this->lang->line('tat_e_details_from');?>" name="from_year" type="text">
+                                </div>
+                                <div class="col-md-6">
+                                  <input class="form-control date" readonly="readonly" placeholder="<?php echo $this->lang->line('dashboard_to');?>" name="to_year" type="text">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="language" class="control-label"><?php echo $this->lang->line('tat_e_details_authority');?></label>
+                              <select class="form-control" name="language" data-plugin="select_tat" data-placeholder="<?php echo $this->lang->line('tat_e_details_authority');?>">
+                                <?php foreach($all_qualification_language as $qualification_language) {?>
+                                <option value="<?php echo $qualification_language->language_id?>"><?php echo $qualification_language->name?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="skill" class="control-label"><?php echo $this->lang->line('tat_e_details_skill');?></label>
+                              <select class="form-control" name="skill" data-plugin="select_tat" data-placeholder="<?php echo $this->lang->line('tat_e_details_skill');?>">
+                                <option value=""></option>
+                                <?php foreach($all_qualification_skill as $qualification_skill) {?>
+                                <option value="<?php echo $qualification_skill->skill_id?>"><?php echo $qualification_skill->name?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="to_year" class="control-label"><?php echo $this->lang->line('tat_description');?></label>
+                              <textarea class="form-control" placeholder="<?php echo $this->lang->line('tat_description');?>" data-show-counter="1" data-limit="300" name="description" cols="30" rows="3" id="d_description"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="form-actions box-footer"> <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_save'))); ?> </div>
+                            </div>
+                          </div>
+                        </div>
+                        <?php echo form_close(); ?> </div>
+                      
+                    </div>
+
+                    <div class="tab-pane current-tab <?php echo $get_animate;?>" id="work-experience" style="display:none;">
+                      <div class="box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('tat_e_details_w_experience');?> </h3>
+                        </div>
+                        <div class="box-body">
+                          <div class="box-datatable table-responsive">
+                            <table class="table table-striped table-bordered dataTable" id="tat_table_work_experience" style="width:100%;">
+                              <thead>
+                                <tr>
+                                  <th><?php echo $this->lang->line('tat_action');?></th>
+                                  <th><?php echo $this->lang->line('tat_company_name');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_frm_date');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_to_date');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_post');?></th>
+                                  <th><?php echo $this->lang->line('tat_description');?></th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_add_new');?> <?php echo $this->lang->line('tat_e_details_w_experience');?> </h3>
+                      </div>
+                      <div class="box-body pb-2">
+                        <?php $attributes = array('name' => 'work_experience_info', 'id' => 'work_experience_info', 'autocomplete' => 'off');?>
+                        <?php $hidden = array('u_basic_info' => 'UPDATE');?>
+                        <?php echo form_open('admin/employees/work_experience_info', $attributes, $hidden);?>
+                        <?php
+							  $data_usr4 = array(
+									'type'  => 'hidden',
+									'name'  => 'user_id',
+									'value' => $user_id,
+							 );
+							echo form_input($data_usr4);
+						  ?>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="company_name"><?php echo $this->lang->line('tat_company_name');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_company_name');?>" name="company_name" type="text" value="" id="company_name">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="post"><?php echo $this->lang->line('tat_e_details_post');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_e_details_post');?>" name="post" type="text" value="" id="post">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="from_year" class="control-label"><?php echo $this->lang->line('tat_e_details_timeperiod');?><i class="tatari-asterisk">*</i></label>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <input class="form-control date" readonly="readonly" placeholder="<?php echo $this->lang->line('tat_e_details_from');?>" name="from_date" type="text">
+                                </div>
+                                <div class="col-md-6">
+                                  <input class="form-control date" readonly="readonly" placeholder="<?php echo $this->lang->line('dashboard_to');?>" name="to_date" type="text">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="description"><?php echo $this->lang->line('tat_description');?></label>
+                              <textarea class="form-control" placeholder="<?php echo $this->lang->line('tat_description');?>" data-show-counter="1" data-limit="300" name="description" cols="30" rows="4" id="description"></textarea>
+                              <span class="countdown"></span> </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="form-actions box-footer"> <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_save'))); ?> </div>
+                            </div>
+                          </div>
+                        </div>
+                        <?php echo form_close(); ?> </div>
+                      
+                    </div>
+
+                    <div class="tab-pane current-tab <?php echo $get_animate;?>" id="bank-account" style="display:none;">
+                      <div class="box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('tat_e_details_baccount');?> </h3>
+                        </div>
+                        <div class="box-body">
+                          <div class="box-datatable table-responsive">
+                            <table class="table table-striped table-bordered dataTable" id="tat_table_bank_account" style="width:100%;">
+                              <thead>
+                                <tr>
+                                  <th><?php echo $this->lang->line('tat_action');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_acc_title');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_acc_number');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_bank_name');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_bank_code');?></th>
+                                  <th><?php echo $this->lang->line('tat_e_details_bank_branch');?></th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_add_new');?> <?php echo $this->lang->line('tat_e_details_baccount');?> </h3>
+                      </div>
+                      <div class="box-body pb-2">
+                        <?php $attributes = array('name' => 'bank_account_info', 'id' => 'bank_account_info', 'autocomplete' => 'off');?>
+                        <?php $hidden = array('u_basic_info' => 'UPDATE');?>
+                        <?php echo form_open('admin/employees/bank_account_info', $attributes, $hidden);?>
+                        <?php
+						  $data_usr4 = array(
+								'type'  => 'hidden',
+								'name'  => 'user_id',
+								'value' => $user_id,
+						 );
+						echo form_input($data_usr4);
+					  ?>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="account_title"><?php echo $this->lang->line('tat_e_details_acc_title');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_e_details_acc_title');?>" name="account_title" type="text" value="" id="account_name">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="account_number"><?php echo $this->lang->line('tat_e_details_acc_number');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_e_details_acc_number');?>" name="account_number" type="text" value="" id="account_number">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="bank_name"><?php echo $this->lang->line('tat_e_details_bank_name');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_e_details_bank_name');?>" name="bank_name" type="text" value="" id="bank_name">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="bank_code"><?php echo $this->lang->line('tat_e_details_bank_code');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_e_details_bank_code');?>" name="bank_code" type="text" value="" id="bank_code">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="bank_branch"><?php echo $this->lang->line('tat_e_details_bank_branch');?></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_e_details_bank_branch');?>" name="bank_branch" type="text" value="" id="bank_branch">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="form-actions box-footer"> <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_save'))); ?> </div>
+                            </div>
+                          </div>
+                        </div>
+                        <?php echo form_close(); ?> </div>
+                      
+                    </div>
+
+
                     <div class="tab-pane current-tab <?php echo $get_animate;?>" id="change-password" style="display:none;">
                       <div class="box-header with-border">
                         <h3 class="box-title"> <?php echo $this->lang->line('header_change_password');?> </h3>
@@ -578,11 +996,14 @@ $leave_user = $this->Tat_model->read_user_info($eid);
                         </div>
                         <?php echo form_close(); ?> </div>
                     </div>
+
+
                 </div>
               </div>
             </div>
           </div>
         </div>
+                          
 
         <div class="tab-pane" id="tat_profile_picture"  >
           <div class="box-body">
@@ -595,23 +1016,23 @@ $leave_user = $this->Tat_model->read_user_info($eid);
                       <?php $hidden = array('u_profile_picture' => 'UPDATE');?>
                       <?php echo form_open_multipart('admin/employees/profile_picture', $attributes, $hidden);?>
                       <?php
-						  $data_usr = array(
-								'type'  => 'hidden',
-								'name'  => 'user_id',
-								'id'    => 'user_id',
-								'value' => $user_id,
-						 );
-						echo form_input($data_usr);
-					  ?>
-                      <?php
-						  $data_usr = array(
-								'type'  => 'hidden',
-								'name'  => 'session_id',
-								'id'    => 'session_id',
-								'value' => $session['user_id'],
-						 );
-						echo form_input($data_usr);
-					  ?>
+                                  $data_usr = array(
+                                    'type'  => 'hidden',
+                                    'name'  => 'user_id',
+                                    'id'    => 'user_id',
+                                    'value' => $user_id,
+                                );
+                                echo form_input($data_usr);
+                                ?>
+                                          <?php
+                                  $data_usr = array(
+                                    'type'  => 'hidden',
+                                    'name'  => 'session_id',
+                                    'id'    => 'session_id',
+                                    'value' => $session['user_id'],
+                                );
+                                echo form_input($data_usr);
+                                ?>
                       <div class="bg-white">
                         <div class="row">
                           <div class="col-md-12">
@@ -656,7 +1077,1080 @@ $leave_user = $this->Tat_model->read_user_info($eid);
           </div>
         </div>
 
-      </div>
-    </div>
-  </div>
-</div>
+
+
+        <?php if(in_array('351',$role_resources_ids)) {?>
+        <div class="tab-pane <?php echo $get_animate;?>" id="tat_employee_set_salary"  >
+          <div class="card-body">
+            <div class="card overflow-hidden">
+              <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                  <div class="list-group list-group-flush account-settings-links"> <a class="salary-tab-list list-group-item list-group-item-action active salary-tab" data-toggle="list" href="javascript:void(0);" data-profile="1" data-profile-block="salary" aria-expanded="true" id="suser_profile_1"><?php echo $this->lang->line('tat_employee_update_salary');?></a> <a class="salary-tab-list list-group-item list-group-item-action salary-tab" data-toggle="list" href="javascript:void(0);" data-profile="2" data-profile-block="set_allowances" aria-expanded="true" id="suser_profile_2"><?php echo $this->lang->line('tat_employee_set_allowances');?></a> <a class="salary-tab-list list-group-item list-group-item-action salary-tab" data-toggle="list" href="javascript:void(0);" data-profile="3" data-profile-block="commissions" aria-expanded="true" id="suser_profile_3"><?php echo $this->lang->line('tat_hr_commissions');?></a> <a class="salary-tab-list list-group-item list-group-item-action salary-tab" data-toggle="list" href="javascript:void(0);" data-profile="4" data-profile-block="loan_deductions" aria-expanded="true" id="suser_profile_4"><?php echo $this->lang->line('tat_employee_set_loan_deductions');?></a> <a class="salary-tab-list list-group-item list-group-item-action salary-tab" data-toggle="list" href="javascript:void(0);" data-profile="5" data-profile-block="statutory_deductions" aria-expanded="true" id="suser_profile_5"><?php echo $this->lang->line('tat_employee_set_statutory_deductions');?></a> <a class="salary-tab-list list-group-item list-group-item-action salary-tab" data-toggle="list" href="javascript:void(0);" data-profile="6" data-profile-block="other_payment" aria-expanded="true" id="suser_profile_6"><?php echo $this->lang->line('tat_employee_set_other_payment');?></a> <a class="salary-tab-list list-group-item list-group-item-action salary-tab" data-toggle="list" href="javascript:void(0);" data-profile="7" data-profile-block="overtime" aria-expanded="true" id="suser_profile_7"><?php echo $this->lang->line('dashboard_overtime');?></a> </div>
+                </div>
+                <div class="col-md-9">
+                  <div class="tab-content active">
+                    <div class="tab-pane <?php echo $get_animate;?> salary-current-tab active" id="salary">
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_employee_update_salary');?> </h3>
+                      </div>
+                      <div class="box-body pb-2">
+                        <?php $attributes = array('name' => 'employee_update_salary', 'id' => 'employee_update_salary', 'autocomplete' => 'off');?>
+                        <?php $hidden = array('user_id' => $user_id, 'u_basic_info' => 'UPDATE');?>
+                        <?php echo form_open('admin/employees/update_salary_option', $attributes, $hidden);?>
+                        <div class="bg-white">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="wages_type"><?php echo $this->lang->line('tat_employee_type_wages');?><i class="tatari-asterisk">*</i></label>
+                                <select name="wages_type" id="wages_type" class="form-control" data-plugin="select_tat">
+                                  <option value="1" <?php if($wages_type==1):?> selected="selected"<?php endif;?>><?php echo $this->lang->line('tat_payroll_basic_salary');?></option>
+                                  <option value="2" <?php if($wages_type==2):?> selected="selected"<?php endif;?>><?php echo $this->lang->line('tat_employee_daily_wages');?></option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="form-group">
+                              <label for="basic_salary"><?php echo $this->lang->line('tat_salary_title');?><i class="tatari-asterisk">*</i></label>
+                                <input class="form-control basic_salary" placeholder="<?php echo $this->lang->line('tat_salary_title');?>" name="basic_salary" type="text" value="<?php echo $basic_salary;?>">
+                              </div>
+                            </div>                          
+                          </div>
+                          <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="form-actions box-footer"> <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_save'))); ?> </div>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                        <?php echo form_close(); ?> </div>
+                    </div>
+                    <div class="tab-pane <?php echo $get_animate;?> salary-current-tab" id="set_allowances">
+                      <div class="box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('tat_employee_set_allowances');?> </h3>
+                        </div>
+                        <div class="box-body">
+                          <div class="box-datatable table-responsive">
+                            <table class="table table-striped table-bordered dataTable" id="tat_table_all_allowances" style="width:100%;">
+                              <thead>
+                                <tr>
+                                  <th><?php echo $this->lang->line('tat_action');?></th>
+                                  <th><?php echo $this->lang->line('tat_salary_allowance_options');?></th>
+                                  <th><?php echo $this->lang->line('dashboard_tat_title');?></th>
+                                  <th><?php echo $this->lang->line('tat_amount');?></th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_employee_set_allowances');?> </h3>
+                      </div>
+                      <div class="box-body pb-2">
+                        <?php $attributes = array('name' => 'employee_update_allowance', 'id' => 'employee_update_allowance', 'autocomplete' => 'off');?>
+                        <?php $hidden = array('u_basic_info' => 'UPDATE');?>
+                        <?php echo form_open('admin/employees/employee_allowance_option', $attributes, $hidden);?>
+                        <?php
+						  $data_usr4 = array(
+							'type'  => 'hidden',
+							'name'  => 'user_id',
+							'value' => $user_id,
+						 );
+						echo form_input($data_usr4);
+					  ?>
+                        <div class="row">
+                          <div class="col-md-3">
+                              <div class="form-group">
+                                <label for="is_allowance_taxable"><?php echo $this->lang->line('tat_salary_allowance_options');?><i class="tatari-asterisk">*</i></label>
+                                <select name="is_allowance_taxable" id="is_allowance_taxable" class="form-control" data-plugin="select_tat">
+                                  <option value="0"><?php echo $this->lang->line('tat_salary_allowance_non_taxable');?></option>
+                                  <option value="1"><?php echo $this->lang->line('tat_salary_allowance_taxable');?></option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="account_title"><?php echo $this->lang->line('dashboard_tat_title');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('dashboard_tat_title');?>" name="allowance_title" type="text" value="" id="allowance_title">
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label for="account_number"><?php echo $this->lang->line('tat_amount');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_amount');?>" name="allowance_amount" type="text" value="" id="allowance_amount">
+                            </div>
+                          </div>
+                          <div class="col-md-2">
+                              <div class="form-group">
+                              <div class="box-footer tatari-salary-button"> <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_save'))); ?> </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="form-actions box-footer"> &nbsp;</div>
+                            </div>
+                          </div>
+                        </div>
+                        <?php echo form_close(); ?> </div>
+                      
+                    </div>
+                    <div class="tab-pane <?php echo $get_animate;?> salary-current-tab" id="commissions" style="display:none;">
+                      <div class="box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('tat_hr_commissions');?> </h3>
+                        </div>
+                        <div class="box-body">
+                          <div class="box-datatable table-responsive">
+                            <table class="table table-striped table-bordered dataTable" id="tat_table_all_commissions" style="width:100%;">
+                              <thead>
+                                <tr>
+                                  <th><?php echo $this->lang->line('tat_action');?></th>
+                                  <th><?php echo $this->lang->line('dashboard_tat_title');?></th>
+                                  <th><?php echo $this->lang->line('tat_amount');?></th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_hr_commissions');?> </h3>
+                      </div>
+                      <div class="box-body pb-2">
+                        <?php $attributes = array('name' => 'employee_update_commissions', 'id' => 'employee_update_commissions', 'autocomplete' => 'off');?>
+                        <?php $hidden = array('u_basic_info' => 'UPDATE');?>
+                        <?php echo form_open('admin/employees/employee_commissions_option', $attributes, $hidden);?>
+                        <?php
+							  $data_usr4 = array(
+								'type'  => 'hidden',
+								'name'  => 'user_id',
+								'value' => $user_id,
+							 );
+							echo form_input($data_usr4);
+						  ?>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="title"><?php echo $this->lang->line('dashboard_tat_title');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('dashboard_tat_title');?>" name="title" type="text" value="" id="title">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="amount"><?php echo $this->lang->line('tat_amount');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_amount');?>" name="amount" type="text" value="" id="amount">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="form-group">
+                              <div class="box-footer tatari-salary-button"> <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_save'))); ?> </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="form-actions box-footer"> &nbsp;</div>
+                            </div>
+                          </div>
+                        </div>
+                        <?php echo form_close(); ?> </div>
+                      
+                    </div>
+                    <div class="tab-pane <?php echo $get_animate;?> salary-current-tab" id="loan_deductions" style="display:none;">
+                      <div class="box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('tat_employee_set_loan_deductions');?> </h3>
+                        </div>
+                        <div class="box-body">
+                          <div class="box-datatable table-responsive">
+                            <table class="table table-striped table-bordered dataTable" id="tat_table_all_deductions" style="width:100%;">
+                              <thead>
+                                <tr>
+                                  <th><?php echo $this->lang->line('tat_action');?></th>
+                                  <th><?php echo $this->lang->line('tat_employee_set_loan_deductions');?></th>
+                                  <th><?php echo $this->lang->line('tat_employee_monthly_installment_title');?></th>
+                                  <th><?php echo $this->lang->line('tat_employee_loan_time');?></th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_employee_set_loan_deductions');?> </h3>
+                      </div>
+                      <div class="box-body pb-2">
+                        <?php $attributes = array('name' => 'add_loan_info', 'id' => 'add_loan_info', 'autocomplete' => 'off');?>
+                        <?php $hidden = array('u_basic_info' => 'UPDATE');?>
+                        <?php echo form_open('admin/employees/employee_loan_info', $attributes, $hidden);?>
+                        <?php
+							  $data_usr4 = array(
+									'type'  => 'hidden',
+									'name'  => 'user_id',
+									'value' => $user_id,
+							 );
+							echo form_input($data_usr4);
+						  ?>
+                        <div class="row">
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="loan_options"><?php echo $this->lang->line('tat_salary_loan_options');?><i class="tatari-asterisk">*</i></label>
+                                <select name="loan_options" id="loan_options" class="form-control" data-plugin="select_tat">
+                                  <option value="1"><?php echo $this->lang->line('tat_loan_ssc_title');?></option>
+                                  <option value="2"><?php echo $this->lang->line('tat_loan_hdmf_title');?></option>
+                                  <option value="0"><?php echo $this->lang->line('tat_loan_other_sd_title');?></option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="month_year"><?php echo $this->lang->line('dashboard_tat_title');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('dashboard_tat_title');?>" name="loan_deduction_title" type="text">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="edu_role"><?php echo $this->lang->line('tat_employee_monthly_installment_title');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_employee_monthly_installment_title');?>" name="monthly_installment" type="text" id="m_monthly_installment">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="month_year"><?php echo $this->lang->line('tat_start_date');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control cont_date" placeholder="<?php echo $this->lang->line('tat_start_date');?>" readonly="readonly" name="start_date" type="text">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="end_date"><?php echo $this->lang->line('tat_end_date');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control cont_date" readonly="readonly" placeholder="<?php echo $this->lang->line('tat_end_date');?>" name="end_date" type="text">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="description"><?php echo $this->lang->line('tat_reason');?></label>
+                              <textarea class="form-control textarea" placeholder="<?php echo $this->lang->line('tat_reason');?>" name="reason" cols="30" rows="2" id="reason2"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="form-actions box-footer"> <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_save'))); ?> </div>
+                            </div>
+                          </div>
+                        </div>
+                        <?php echo form_close(); ?> </div>
+                      
+                    </div>
+                    <div class="tab-pane <?php echo $get_animate;?> salary-current-tab" id="statutory_deductions" style="display:none;">
+                      <div class="box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('tat_employee_set_statutory_deductions');?> </h3>
+                        </div>
+                        <div class="box-body">
+                          <div class="box-datatable table-responsive">
+                            <table class="table table-striped table-bordered dataTable" id="tat_table_all_statutory_deductions" style="width:100%;">
+                              <thead>
+                                <tr>
+                                  <th><?php echo $this->lang->line('tat_action');?></th>
+                                  <th><?php echo $this->lang->line('tat_salary_sd_options');?></th>
+                                  <th><?php echo $this->lang->line('dashboard_tat_title');?></th>
+                                  <th><?php echo $this->lang->line('tat_amount');?> <?php if($system[0]->statutory_fixed!='yes'):?> (%) <?php endif;?></th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_employee_set_statutory_deductions');?> </h3>
+                      </div>
+                      <div class="box-body pb-2">
+                        <?php $attributes = array('name' => 'statutory_deductions_info', 'id' => 'statutory_deductions_info', 'autocomplete' => 'off');?>
+                        <?php $hidden = array('u_basic_info' => 'UPDATE');?>
+                        <?php echo form_open('admin/employees/set_statutory_deductions', $attributes, $hidden);?>
+                        <?php
+							  $data_usr4 = array(
+								'type'  => 'hidden',
+								'name'  => 'user_id',
+								'value' => $user_id,
+							 );
+							echo form_input($data_usr4);
+						  ?>
+                        <div class="row">
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="statutory_options"><?php echo $this->lang->line('tat_salary_sd_options');?><i class="tatari-asterisk">*</i></label>
+                                <select name="statutory_options" id="statutory_options" class="form-control" data-plugin="select_tat">
+                                  <option value="1"><?php echo $this->lang->line('tat_sd_ssc_title');?></option>
+                                  <option value="4"><?php echo $this->lang->line('tat_sd_wht_title');?></option>
+                                  <option value="0"><?php echo $this->lang->line('tat_sd_other_sd_title');?></option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                            <div class="form-group">
+                              <label for="title"><?php echo $this->lang->line('dashboard_tat_title');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('dashboard_tat_title');?>" name="title" type="text" value="" id="title">
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label for="amount"><?php echo $this->lang->line('tat_amount');?>
+                              <?php if($system[0]->statutory_fixed!='yes'):?> (%) <?php endif;?><i class="tatari-asterisk">*</i>
+                              </label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_amount');?>" name="amount" type="text" value="" id="amount">
+                            </div>
+                          </div>
+                          <div class="col-md-2">
+                              <div class="form-group">
+                              <div class="box-footer tatari-salary-button"> <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_save'))); ?> </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="form-actions box-footer">&nbsp;</div>
+                            </div>
+                          </div>
+                        </div>
+                        <?php echo form_close(); ?> </div>
+                      
+                    </div>
+                    <div class="tab-pane <?php echo $get_animate;?> salary-current-tab" id="other_payment" style="display:none;">
+                      <div class="box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('tat_employee_set_other_payment');?> </h3>
+                        </div>
+                        <div class="box-body">
+                          <div class="box-datatable table-responsive">
+                            <table class="table table-striped table-bordered dataTable" id="tat_table_all_other_payments" style="width:100%;">
+                              <thead>
+                                <tr>
+                                  <th><?php echo $this->lang->line('tat_action');?></th>
+                                  <th><?php echo $this->lang->line('dashboard_tat_title');?></th>
+                                  <th><?php echo $this->lang->line('tat_amount');?></th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_employee_set_other_payment');?> </h3>
+                      </div>
+                      <div class="box-body pb-2">
+                        <?php $attributes = array('name' => 'other_payments_info', 'id' => 'other_payments_info', 'autocomplete' => 'off');?>
+                        <?php $hidden = array('u_basic_info' => 'UPDATE');?>
+                        <?php echo form_open('admin/employees/set_other_payments', $attributes, $hidden);?>
+                        <?php
+							  $data_usr4 = array(
+								'type'  => 'hidden',
+								'name'  => 'user_id',
+								'value' => $user_id,
+							 );
+							echo form_input($data_usr4);
+						  ?>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="title"><?php echo $this->lang->line('dashboard_tat_title');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('dashboard_tat_title');?>" name="title" type="text" value="" id="title">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="amount"><?php echo $this->lang->line('tat_amount');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_amount');?>" name="amount" type="text" value="" id="amount">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="form-group">
+                              <div class="box-footer tatari-salary-button"> <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_save'))); ?> </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="form-actions box-footer">&nbsp;</div>
+                            </div>
+                          </div>
+                        </div>
+                        <?php echo form_close(); ?> </div>
+                      
+                    </div>
+                    <div class="tab-pane <?php echo $get_animate;?> salary-current-tab" id="overtime" style="display:none;">
+                      <div class="box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('dashboard_overtime');?> </h3>
+                        </div>
+                        <div class="box-body">
+                          <div class="box-datatable table-responsive">
+                            <table class="table table-striped table-bordered dataTable" id="tat_table_emp_overtime" style="width:100%;">
+                              <thead>
+                                <tr>
+                                  <th><?php echo $this->lang->line('tat_action');?></th>
+                                  <th><?php echo $this->lang->line('tat_employee_overtime_title');?></th>
+                                  <th><?php echo $this->lang->line('tat_employee_overtime_no_of_days');?></th>
+                                  <th><?php echo $this->lang->line('tat_employee_overtime_hour');?></th>
+                                  <th><?php echo $this->lang->line('tat_employee_overtime_rate');?></th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('dashboard_overtime');?> </h3>
+                      </div>
+                      <div class="box-body pb-2">
+                        <?php $attributes = array('name' => 'overtime_info', 'id' => 'overtime_info', 'autocomplete' => 'off');?>
+                        <?php $hidden = array('u_basic_info' => 'UPDATE');?>
+                        <?php echo form_open('admin/employees/set_overtime', $attributes, $hidden);?>
+                        <?php
+						  $data_usr4 = array(
+								'type'  => 'hidden',
+								'name'  => 'user_id',
+								'value' => $user_id,
+						 );
+						echo form_input($data_usr4);
+					  ?>
+                        <div class="row">
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label for="overtime_type"><?php echo $this->lang->line('tat_employee_overtime_title');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_employee_overtime_title');?>" name="overtime_type" type="text" value="" id="overtime_type">
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label for="no_of_days"><?php echo $this->lang->line('tat_employee_overtime_no_of_days');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_employee_overtime_no_of_days');?>" name="no_of_days" type="text" value="" id="no_of_days">
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label for="overtime_hours"><?php echo $this->lang->line('tat_employee_overtime_hour');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_employee_overtime_hour');?>" name="overtime_hours" type="text" value="" id="overtime_hours">
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label for="overtime_rate"><?php echo $this->lang->line('tat_employee_overtime_rate');?><i class="tatari-asterisk">*</i></label>
+                              <input class="form-control" placeholder="<?php echo $this->lang->line('tat_employee_overtime_rate');?>" name="overtime_rate" type="text" value="" id="overtime_rate">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="form-actions box-footer"> <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_save'))); ?> </div>
+                            </div>
+                          </div>
+                        </div>
+                        <?php echo form_close(); ?> </div>
+                      
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <?php } ?>
+
+
+
+        <div class="tab-pane <?php echo $get_animate;?>" id="tat_leaves">
+          <div class="box-body">
+            <div class="row no-gutters row-bordered row-border-light">
+              <div class="col-md-12">
+                <div class="tab-content">
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_e_details_leave');?> </h3>
+                      </div>
+                      <div class="box-body pb-2">
+                        <div class="row">
+                          <?php $leave_categories_ids = explode(',',$leave_user[0]->leave_categories); ?>
+							<?php foreach($all_leave_types as $type) {
+                                if(in_array($type->leave_type_id,$leave_categories_ids)){?>
+                            <?php
+                                $hlfcount =0;
+                                $leave_halfday_cal = employee_leave_halfday_cal($type->leave_type_id,$this->uri->segment(4));
+                                foreach($leave_halfday_cal as $lhalfday):
+                                    $hlfcount += 0.5;
+                                endforeach;
+                                
+                                $count_l = count_leaves_info($type->leave_type_id,$this->uri->segment(4));
+                                $count_l = $count_l - $hlfcount;
+                            ?>
+                            <?php
+                                $edays_per_year = $type->days_per_year;
+                                
+                                if($count_l == 0){
+                                    $progress_class = '';
+                                    $count_data = 0;
+                                } else {
+                                    if($edays_per_year > 0){
+                                        $count_data = $count_l / $edays_per_year * 100;
+                                    } else {
+                                        $count_data = 0;
+                                    }
+                                    // progress
+                                    if($count_data <= 20) {
+                                        $progress_class = 'progress-success';
+                                    } else if($count_data > 20 && $count_data <= 50){
+                                        $progress_class = 'progress-info';
+                                    } else if($count_data > 50 && $count_data <= 75){
+                                        $progress_class = 'progress-warning';
+                                    } else {
+                                        $progress_class = 'progress-danger';
+                                    }
+                                }
+                            ?>
+                          <div class="col-md-3">
+                            <div class="box mb-4">
+                              <div class="box-body">
+                                <div class="d-flex align-items-center">
+                                  <div class="fa fa-calendar-check-o display-4 text-success"></div>
+                                  <div class="ml-3">
+                                    <div class="text-muted small"> <?php echo $type->type_name;?> (<?php echo $count_l;?>/<?php echo $edays_per_year;?>)</div>
+                                    <div class="text-large">
+                                      <div class="progress" style="height: 6px;">
+                                        <div class="progress-bar" style="width: <?php echo $count_data;?>%;"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <?php
+							} }
+							?>
+                        </div>
+                      </div>
+                      <?php $leave = $this->Attendance_model->get_employee_leaves($user_id); ?>
+                      <div class="box <?php echo $get_animate;?>">
+                      <div class="box-header with-border">
+                        <h3 class="box-title"><?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('left_leave');?></h3>
+                      </div>
+                      <div class="box-body">
+                        <div class="box-datatable table-responsive">
+                          <table class="datatables-demo table table-striped table-bordered tat_tatari_table" id="tat_hr_table">
+                            <thead>
+                              <tr>
+                                <th><?php echo $this->lang->line('tat_view');?></th>
+                                <th width="250"><?php echo $this->lang->line('tat_leave_type');?></th>
+                                <th><?php echo $this->lang->line('left_department');?></th>
+                                <th><i class="fa fa-calendar"></i> <?php echo $this->lang->line('tat_leave_duration');?></th>
+                                <th><i class="fa fa-calendar"></i> <?php echo $this->lang->line('tat_applied_on');?></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($leave->result() as $r) { ?>
+                            <?php
+					
+							$user = $this->Tat_model->read_user_info($r->employee_id);
+							if(!is_null($user)){
+								$full_name = $user[0]->first_name. ' '.$user[0]->last_name;
+						
+								$department = $this->Department_model->read_department_information($user[0]->department_id);
+								if(!is_null($department)){
+									$department_name = $department[0]->department_name;
+								} else {
+									$department_name = '--';	
+								}
+							} else {
+								$full_name = '--';	
+								$department_name = '--';
+							}
+							 
+					
+							 $leave_type = $this->Attendance_model->read_leave_type_information($r->leave_type_id);
+							 if(!is_null($leave_type)){
+								$type_name = $leave_type[0]->type_name;
+							} else {
+								$type_name = '--';	
+							}
+							
+				
+							$company = $this->Tat_model->read_company_info($r->company_id);
+							if(!is_null($company)){
+								$comp_name = $company[0]->name;
+							} else {
+								$comp_name = '--';	
+							}
+							 
+							$datetime1 = new DateTime($r->from_date);
+							$datetime2 = new DateTime($r->to_date);
+							$interval = $datetime1->diff($datetime2);
+							if(strtotime($r->from_date) == strtotime($r->to_date)){
+								$no_of_days =1;
+							} else {
+								$no_of_days = $interval->format('%a') + 1;
+							}
+							$applied_on = $this->Tat_model->set_date_format($r->applied_on);
+							if($r->is_half_day == 1){
+							$duration = $this->Tat_model->set_date_format($r->from_date).' '.$this->lang->line('dashboard_to').' '.$this->Tat_model->set_date_format($r->to_date).'<br>'.$this->lang->line('tat_tatari_total_days').': '.$this->lang->line('tat_hr_leave_half_day');
+							} else {
+								$duration = $this->Tat_model->set_date_format($r->from_date).' '.$this->lang->line('dashboard_to').' '.$this->Tat_model->set_date_format($r->to_date).'<br>'.$this->lang->line('tat_tatari_total_days').': '.$no_of_days;
+							}
+							
+							 
+							if($r->status==1): $status = '<span class="badge bg-orange">'.$this->lang->line('tat_pending').'</span>';
+							elseif($r->status==2): $status = '<span class="badge bg-green">'.$this->lang->line('tat_approved').'</span>';
+							elseif($r->status==4): $status = '<span class="badge bg-green">'.$this->lang->line('tat_role_first_level_approved').'</span>';
+							else: $status = '<span class="badge bg-red">'.$this->lang->line('tat_rejected').'</span>'; endif;
+							
+							if(in_array('290',$role_resources_ids)) { //view
+								$view = '<span data-toggle="tooltip" data-placement="top" title="'.$this->lang->line('tat_view_details').'"><a href="'.site_url().'admin/attendance/leave_details/id/'.$r->leave_id.'/" target="_blank"><button type="button" class="btn icon-btn btn-xs btn-default waves-effect waves-light"><span class="fa fa-arrow-circle-right"></span></button></a></span>';
+							} else {
+								$view = '';
+							}
+							$combhr = $view;
+							$itype_name = $type_name.'<br><small class="text-muted"><i>'.$this->lang->line('tat_reason').': '.$r->reason.'<i></i></i></small><br><small class="text-muted"><i>'.$status.'<i></i></i></small><br><small class="text-muted"><i>'.$this->lang->line('left_company').': '.$comp_name.'<i></i></i></small>';
+							?>
+                              <tr>
+                                <td><?php echo $combhr;?></td>
+                                <td><?php echo $itype_name;?></td>
+                                <td><?php echo $department_name;?></td>
+                                <td><i class="fa fa-calendar"></i> <?php echo $duration;?></td>
+                                <td><i class="fa fa-calendar"></i> <?php echo $applied_on;?></td>
+                              </tr>
+                              <?php } ?>
+                             </tbody> 
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="tab-pane <?php echo $get_animate;?>" id="tat_core_hr">
+          <div class="box-body">
+            <div class="row no-gutters row-bordered row-border-light">
+              <div class="col-md-2 pt-0"> 
+
+              <div class="list-group list-group-flush account-settings-links"> 
+
+                    <a class="list-group-item list-group-item-action  tat-core-hr-opt  active tat-core-hr-tab" data-toggle="list" href="javascript:void(0);" data-core-hr-info="55" data-core-profile-block="left_transfers" aria-expanded="true" id="core_hr_55"><?php echo $this->lang->line('left_transfers');?></a> 
+                    
+                    <a class="list-group-item list-group-item-action  tat-core-hr-opt tat-core-hr-tab" data-toggle="list" href="javascript:void(0);" data-core-hr-info="56" data-core-profile-block="left_promotions" aria-expanded="true" id="core_hr_56"><?php echo $this->lang->line('left_promotions');?></a>
+                    
+                    <a class="list-group-item list-group-item-action  tat-core-hr-opt tat-core-hr-tab" data-toggle="list" href="javascript:void(0);" data-core-hr-info="57" data-core-profile-block="left_complaints" aria-expanded="true" id="core_hr_57"><?php echo $this->lang->line('left_complaints');?></a>
+                    
+                    <a class="list-group-item list-group-item-action  tat-core-hr-opt tat-core-hr-tab" data-toggle="list" href="javascript:void(0);" data-core-hr-info="58" data-core-profile-block="left_warnings" aria-expanded="true" id="core_hr_58"><?php echo $this->lang->line('left_warnings');?></a> 
+                    
+                </div>
+              </div>
+
+                <div class="col-md-10">
+                <div class="tab-content">
+                   
+                    <div class="tab-pane active core-current-tab <?php echo $get_animate;?>" id="left_transfers" style="display:none;">
+                     <div class="box <?php echo $get_animate;?>">
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('left_transfers');?> </h3>
+                      </div>
+                      <?php $transfer = $this->Transfers_model->get_employee_transfers($user_id); ?>
+                      <div class="box-body">
+                        <div class="box-datatable table-responsive">
+                          <table class="datatables-demo table table-striped table-bordered tat_tatari_table">
+                            <thead>
+                              <tr>
+                                <th><?php echo $this->lang->line('tat_view');?></th>
+                                <th><?php echo $this->lang->line('tat_summary');?></th>
+                                <th><?php echo $this->lang->line('left_company');?></th>
+                                <th><i class="fa fa-calendar"></i> <?php echo $this->lang->line('tat_transfer_date');?></th>
+                                <th><?php echo $this->lang->line('dashboard_tat_status');?></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($transfer->result() as $r) { ?>
+                            <?php
+					
+                                $transfer_date = $this->Tat_model->set_date_format($r->transfer_date);
+                              
+                                $department = $this->Department_model->read_department_information($r->transfer_department);
+                                if(!is_null($department)){
+                                  $department_name = $department[0]->department_name;
+                                } else {
+                                  $department_name = '--';	
+                                }
+                              
+                                $location = $this->Location_model->read_location_information($r->transfer_location);
+                                if(!is_null($location)){
+                                  $location_name = $location[0]->location_name;
+                                } else {
+                                  $location_name = '--';	
+                                }
+                            
+                                if($r->status==0): $status = '<span class="badge bg-orange">'.$this->lang->line('tat_pending').'</span>';
+                                elseif($r->status==1): $status = '<span class="badge bg-green">'.$this->lang->line('tat_accepted').'</span>';else: $status = '<span class="badge bg-red">'.$this->lang->line('tat_rejected').'</span>'; endif;
+
+                                $company = $this->Tat_model->read_company_info($r->company_id);
+                                if(!is_null($company)){
+                                  $comp_name = $company[0]->name;
+                                } else {
+                                  $comp_name = '--';	
+                                }
+							
+                        if(in_array('233',$role_resources_ids)) { //view
+                          $view = '<span data-toggle="tooltip" data-placement="top" title="'.$this->lang->line('tat_view').'"><button type="button" class="btn icon-btn btn-xs btn-default waves-effect waves-light" data-toggle="modal" data-target=".view-modal-data" data-xfield_id="'. $r->transfer_id . '" data-field_type="transfers"><span class="fa fa-eye"></span></button></span>';
+                        } else {
+                          $view = '';
+                        }
+                      $combhr = $view;
+                      $xinfo = $this->lang->line('tat_transfer_to_department').': '.$department_name.'<i></i></i></small><br><small class="text-muted"><i>'.$this->lang->line('tat_transfer_to_location').': '.$location_name.'<i></i></i></small>';
+                        ?>
+                            <tr>
+                                <td><?php echo $combhr;?></td>
+                                <td><?php echo $xinfo;?></td>
+                                <td><?php echo $comp_name;?></td>
+                                <td><?php echo $transfer_date;?></td>
+                                <td><?php echo $status;?></td>
+                              </tr>
+                            <?php } ?>  
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="tab-pane active core-current-tab <?php echo $get_animate;?>" id="left_promotions" style="display:none;">
+                     <div class="box <?php echo $get_animate;?>">
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('left_promotions');?> </h3>
+                      </div>
+                      <?php $promotion = $this->Promotion_model->get_employee_promotions($user_id); ?>
+                      <div class="box-body">
+                        <div class="box-datatable table-responsive">
+                          <table class="datatables-demo table table-striped table-bordered tat_tatari_table">
+                            <thead>
+                              <tr>
+                                <th><?php echo $this->lang->line('tat_view');?></th>
+                                <th><?php echo $this->lang->line('tat_promotion_title');?></th>
+                                <th><i class="fa fa-calendar"></i> <?php echo $this->lang->line('tat_e_details_date');?></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($promotion->result() as $r) { ?>
+                            <?php
+							// get company
+							$company = $this->Tat_model->read_company_info($r->company_id);
+							if(!is_null($company)){
+								$comp_name = $company[0]->name;
+							} else {
+								$comp_name = '--';	
+							}
+							// get promotion date
+							$promotion_date = $this->Tat_model->set_date_format($r->promotion_date);
+							if(in_array('236',$role_resources_ids)) { //view
+								$view = '<span data-toggle="tooltip" data-placement="top" title="'.$this->lang->line('tat_view').'"><button type="button" class="btn icon-btn btn-xs btn-default waves-effect waves-light" data-toggle="modal" data-target=".view-modal-data" data-xfield_id="'. $r->promotion_id . '" data-field_type="promotion"><span class="fa fa-eye"></span></button></span>';
+							} else {
+								$view = '';
+							}
+							$combhr = $view;
+							$pro_desc = $r->title.'<br><small class="text-muted"><i>'.$this->lang->line('tat_description').': '.$r->description.'<i></i></i></small>';
+							?>
+                            <tr>
+                                <td><?php echo $combhr;?></td>
+                                <td><?php echo $pro_desc;?></td>
+                                <td><?php echo $promotion_date;?></td>
+                              </tr>
+                            <?php } ?>  
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="tab-pane active core-current-tab <?php echo $get_animate;?>" id="left_complaints" style="display:none;">
+                     <div class="box <?php echo $get_animate;?>">
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('left_complaints');?> </h3>
+                      </div>
+                      <?php $complaint = $this->Complaints_model->get_employee_complaints($user_id); ?>
+                      <div class="box-body">
+                        <div class="box-datatable table-responsive">
+                          <table class="datatables-demo table table-striped table-bordered tat_tatari_table">
+                            <thead>
+                              <tr>
+                                <th><?php echo $this->lang->line('tat_view');?></th>
+                                <th width="200"><i class="fa fa-user"></i> <?php echo $this->lang->line('tat_complaint_from');?></th>
+                                <th><i class="fa fa-users"></i> <?php echo $this->lang->line('tat_complaint_against');?></th>
+                                <th><?php echo $this->lang->line('tat_complaint_title');?></th>
+                                <th><i class="fa fa-calendar"></i> <?php echo $this->lang->line('tat_complaint_date');?></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($complaint->result() as $r) { ?>
+                            <?php
+                          
+                            $user = $this->Tat_model->read_user_info($r->complaint_from);
+                          
+                            if(!is_null($user)){
+                              $complaint_from = $user[0]->first_name.' '.$user[0]->last_name;
+                            } else {
+                              $complaint_from = '--';	
+                            }
+                            
+                            if($r->complaint_against == '') {
+                              $ol = '--';
+                            } else {
+                              $ol = '<ol class="nl">';
+                              foreach(explode(',',$r->complaint_against) as $desig_id) {
+                                $_comp_name = $this->Tat_model->read_user_info($desig_id);
+                                if(!is_null($_comp_name)){
+                                  $ol .= '<li>'.$_comp_name[0]->first_name.' '.$_comp_name[0]->last_name.'</li>';
+                                } else {
+                                  $ol .= '';
+                                }
+                                
+                              }
+                              $ol .= '</ol>';
+                            }
+						
+							$complaint_date = $this->Tat_model->set_date_format($r->complaint_date);
+						
+							if(in_array('237',$role_resources_ids)) { //view
+								$view = '<span data-toggle="tooltip" data-placement="top" title="'.$this->lang->line('tat_view').'"><button type="button" class="btn icon-btn btn-xs btn-default waves-effect waves-light" data-toggle="modal" data-target=".view-modal-data" data-xfield_id="'. $r->complaint_id . '" data-field_type="complaints"><span class="fa fa-eye"></span></button></span>';
+							} else {
+								$view = '';
+							}
+					
+							$company = $this->Tat_model->read_company_info($r->company_id);
+							if(!is_null($company)){
+								$comp_name = $company[0]->name;
+							} else {
+								$comp_name = '--';	
+							}
+						
+							if($r->status==0): $status = '<span class="badge bg-red">'.$this->lang->line('tat_pending').'</span>';
+							elseif($r->status==1): $status = '<span class="badge bg-green">'.$this->lang->line('tat_accepted').'</span>'; else: $status = '<span class="badge bg-red">'.$this->lang->line('tat_rejected').'</span>';endif;
+							// info
+							$icomplaint_from = $complaint_from.'<br><small class="text-muted"><i>'.$this->lang->line('tat_description').': '.$r->description.'<i></i></i></small><br><small class="text-muted"><i>'.$status.'<i></i></i></small>';
+							$combhr = $view;
+							?>
+                            <tr>
+                                <td><?php echo $combhr;?></td>
+                                <td><?php echo $icomplaint_from;?></td>
+                                <td><?php echo $ol;?></td>
+                                <td><?php echo $r->title;?></td>
+                                <td><?php echo $complaint_date;?></td>
+                              </tr>
+                            <?php } ?>  
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="tab-pane active core-current-tab <?php echo $get_animate;?>" id="left_warnings" style="display:none;">
+                     <div class="box <?php echo $get_animate;?>">
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('left_warnings');?> </h3>
+                      </div>
+                      <?php $warning = $this->Warning_model->get_employee_warning($user_id); ?>
+                      <div class="box-body">
+                        <div class="box-datatable table-responsive">
+                          <table class="datatables-demo table table-striped table-bordered tat_tatari_table">
+                            <thead>
+                              <tr>
+                                <th><?php echo $this->lang->line('tat_view');?></th>
+                                <th><?php echo $this->lang->line('tat_subject');?></th>
+                                <th><i class="fa fa-calendar"></i> <?php echo $this->lang->line('tat_warning_date');?></th>
+                                <th><i class="fa fa-user"></i> <?php echo $this->lang->line('tat_warning_by');?></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($warning->result() as $r) { ?>
+                            <?php
+						
+							$user = $this->Tat_model->read_user_info($r->warning_to);
+						
+							if(!is_null($user)){
+								$warning_to = $user[0]->first_name.' '.$user[0]->last_name;
+							} else {
+								$warning_to = '--';	
+							}
+							
+							$user_by = $this->Tat_model->read_user_info($r->warning_by);
+						
+							if(!is_null($user_by)){
+								$warning_by = $user_by[0]->first_name.' '.$user_by[0]->last_name;
+							} else {
+								$warning_by = '--';	
+							}
+						
+							$warning_date = $this->Tat_model->set_date_format($r->warning_date);
+									
+				
+							if($r->status==0): $status = $this->lang->line('tat_pending');
+							elseif($r->status==1): $status = $this->lang->line('tat_accepted'); else: $status = $this->lang->line('tat_rejected'); endif;
+							
+							$warning_type = $this->Warning_model->read_warning_type_information($r->warning_type_id);
+							if(!is_null($warning_type)){
+								$wtype = $warning_type[0]->type;
+							} else {
+								$wtype = '--';	
+							}
+						
+							$company = $this->Tat_model->read_company_info($r->company_id);
+							if(!is_null($company)){
+								$comp_name = $company[0]->name;
+							} else {
+								$comp_name = '--';	
+							}
+							
+							if(in_array('238',$role_resources_ids)) { //view
+								$view = '<span data-toggle="tooltip" data-placement="top" title="'.$this->lang->line('tat_view').'"><button type="button" class="btn icon-btn btn-xs btn-default waves-effect waves-light" data-toggle="modal" data-target=".view-modal-data" data-xfield_id="'. $r->warning_id . '" data-field_type="warning"><span class="fa fa-eye"></span></button></span>';
+							} else {
+								$view = '';
+							}
+							if($r->status==0): $status = '<span class="badge bg-orange">'.$this->lang->line('tat_pending').'</span>';
+							elseif($r->status==1): $status = '<span class="badge bg-green">'.$this->lang->line('tat_accepted').'</span>';else: $status = '<span class="badge bg-red">'.$this->lang->line('tat_rejected').'</span>'; endif;
+							
+							$combhr = $view;
+							
+							$iwarning_to = $warning_to.'<br><small class="text-muted"><i>'.$wtype.'<i></i></i></small><br><small class="text-muted"><i>'.$status.'<i></i></i></small>';
+							?>
+                            <tr>
+                                <td><?php echo $combhr;?></td>
+                                <td><?php echo $r->subject;?></td>
+                                <td><?php echo $warning_date;?></td>
+                                <td><?php echo $warning_by;?></td>
+                              </tr>
+                            <?php } ?>  
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+            
+                    
+                </div>  
+                </div> 
+            </div>
+          </div>
+        </div>
+
+
+        <div class="tab-pane <?php echo $get_animate;?>" id="tat_payslips">
+          <div class="box-body">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-12">
+                     <div class="box <?php echo $get_animate;?>">
+                      <div class="box-header with-border">
+                        <h3 class="box-title"> <?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('left_payment_history');?> </h3>
+                      </div>
+                      <?php $history = $this->Payroll_model->get_payroll_slip($user_id); ?>
+                      <div class="box-body">
+                        <div class="box-datatable table-responsive">
+                          <table class="datatables-demo table table-striped table-bordered tat_tatari_table" id="tat_hr_table">
+                            <thead>
+                              <tr>
+                                <th><?php echo $this->lang->line('tat_action');?></th>
+                                <th><?php echo $this->lang->line('tat_payroll_net_payable');?></th>
+                                <th><?php echo $this->lang->line('tat_salary_month');?></th>
+                                <th><i class="fa fa-calendar"></i> <?php echo $this->lang->line('tat_payroll_date_title');?></th>
+                                <th><?php echo $this->lang->line('dashboard_tat_status');?></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($history->result() as $r) { ?>
+                            <?php
+							
+                                  $user = $this->Tat_model->read_user_info($r->employee_id);
+                                  
+                                  if(!is_null($user)){
+                                  $full_name = $user[0]->first_name.' '.$user[0]->last_name;
+                                  $emp_link = $user[0]->employee_id;			  		  
+                                  $month_payment = date("F, Y", strtotime($r->salary_month));
+                                  
+                                  $p_amount = $this->Tat_model->currency_sign($r->net_salary);
+                                  
+                                
+                                  $created_at = $this->Tat_model->set_date_format($r->created_at);
+                              
+                                  $designation = $this->Designation_model->read_designation_information($user[0]->designation_id);
+                                  if(!is_null($designation)){
+                                    $designation_name = $designation[0]->designation_name;
+                                  } else {
+                                    $designation_name = '--';	
+                                  }
+                                
+                                  $department = $this->Department_model->read_department_information($user[0]->department_id);
+                                  if(!is_null($department)){
+                                  $department_name = $department[0]->department_name;
+                                  } else {
+                                  $department_name = '--';	
+                                  }
+                                  $department_designation = $designation_name.' ('.$department_name.')';
+                                  
+                                  $company = $this->Tat_model->read_company_info($user[0]->company_id);
+                                  if(!is_null($company)){
+                                    $comp_name = $company[0]->name;
+                                  } else {
+                                    $comp_name = '--';	
+                                  }
+                                
+                                  $bank_account = $this->Employees_model->get_employee_bank_account_last($user[0]->user_id);
+                                  if(!is_null($bank_account)){
+                                    $account_number = $bank_account[0]->account_number;
+                                  } else {
+                                    $account_number = '--';	
+                                  }
+                                  $payslip = '<span data-toggle="tooltip" data-placement="top" title="'.$this->lang->line('tat_view').'"><a href="'.site_url().'admin/payroll/payslip/id/'.$r->payslip_key.'"><button type="button" class="btn icon-btn btn-xs btn-default waves-effect waves-light"><span class="fa fa-arrow-circle-right"></span></button></a></span><span data-toggle="tooltip" data-placement="top" title="'.$this->lang->line('tat_download').'"><a href="'.site_url().'admin/payroll/pdf_create/p/'.$r->payslip_key.'"><button type="button" class="btn icon-btn btn-xs btn-default waves-effect waves-light"><span class="fa fa-download"></span></button></a></span>';
+                                  
+                                $ifull_name = nl2br ($full_name."\r\n <small class='text-muted'><i>".$this->lang->line('tat_employees_id').': '.$emp_link."<i></i></i></small>\r\n <small class='text-muted'><i>".$department_designation.'<i></i></i></small>');
+                                  ?>
+                            <tr>
+                                <td><?php echo $payslip;?></td>
+                                <td><?php echo $p_amount;?></td>
+                                <td><?php echo $month_payment;?></td>
+                                <td><?php echo $created_at;?></td>
+                                <td><?php echo $this->lang->line('tat_payroll_paid');?></td>
+                              </tr>
+                            <?php } } ?>  
+                            </tbody>
+                          </table>
+                                  
+                        </div>
+                      </div>                                        
+                </div>  
+                </div> 
+            </div>
+          </div>
+        </div>
+
+
+                  </div>  
+                </div> 
+            </div>
+          </div>
+  
+
+                      
+
+
+  

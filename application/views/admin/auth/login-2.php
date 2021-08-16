@@ -3,6 +3,7 @@
 <?php $site_lang = $this->load->helper('language');?>
 <?php $wz_lang = $site_lang->session->userdata('site_lang');?>
 <?php $favicon = base_url().'uploads/logo/favicon/'.$company[0]->favicon;?>
+
 <?php
 $session = $this->session->userdata('username');
 if(!empty($session)){ 
@@ -11,17 +12,6 @@ if(!empty($session)){
 ?>
 <?php
 $session = $this->session->userdata('username');
-if(empty($wz_lang)):
-	$flg_icn = '<img src="'.base_url().'uploads/languages_flag/gb.gif">';
-elseif($wz_lang == 'english'):
-	$lang_code = $this->Tat_model->get_language_info($wz_lang);
-	$flg_icn = $lang_code[0]->language_flag;
-	$flg_icn = '<img src="'.base_url().'uploads/languages_flag/'.$flg_icn.'">';
-else:
-	$lang_code = $this->Tat_model->get_language_info($wz_lang);
-	$flg_icn = $lang_code[0]->language_flag;
-	$flg_icn = '<img src="'.base_url().'uploads/languages_flag/'.$flg_icn.'">';
-endif;
 if($system[0]->enable_auth_background=='yes'):
 	$auth_bg = 'style="background-position: center center; background-size: cover; background-image: url('.base_url().'assets/tatari_assets/img/bg/bg-4.jpg");"';
 else:
@@ -34,6 +24,7 @@ endif;
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title><?php echo $title; ?></title>
+
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <link rel="icon" type="image/x-icon" href="<?php echo $favicon;?>">
@@ -51,7 +42,7 @@ endif;
 <link media="all" type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/tatari_assets/css/tatari/animate.css">
 
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<link rel="stylesheet" href="<?php echo base_url();?>assets/fonts/font2.css">
 </head>
 <body class="hold-transition login-page" <?php echo $auth_bg;?>>
 <img id="tatload-img" src="<?php echo base_url()?>assets/img/loading.gif" style="">
@@ -64,6 +55,8 @@ endif;
     margin-top: 0px;
 }
 </style>
+
+
 <div class="login-box animated fadeInDownBig"> 
   
   <!-- /.login-logo -->

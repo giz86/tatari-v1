@@ -66,8 +66,8 @@
 <link rel="stylesheet" href="<?php echo base_url();?>assets/tatari_assets/css/tatari/switch.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/tatari_assets/css/tatari/tat_tatari_custom.css">
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+<!-- Google Poppins TransFont -->
+<link rel="stylesheet" href="<?php echo base_url();?>/assets/fonts/font1.css">
 <link rel="stylesheet" href="<?php echo base_url();?>/assets/tatari_assets/vendor/libs/bootstrap-tagsinput/bootstrap-tagsinput.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/tatari_assets/theme_assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <?php if($this->router->fetch_class() =='roles') { ?>
