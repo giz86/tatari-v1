@@ -46,6 +46,13 @@ img {
     color: #9a9a9a;
     text-transform: uppercase;
 }
+.tatari-asterisk{
+	padding: 2px 2px;
+    font-size: 90%;
+    color: #da1111 !important;
+    border-radius: 4px;
+	font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+}
 .emp-name a {
 	font-size:20px;
 	color:#455a64;
@@ -379,11 +386,4 @@ img {
 }
 .tatari-text-info-margin {
 	margin-left: 32px;
-}
-.tatari-asterisk{
-	padding: 2px 2px;
-    font-size: 90%;
-    color: #ffffff !important;
-    border-radius: 4px;
-	font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }

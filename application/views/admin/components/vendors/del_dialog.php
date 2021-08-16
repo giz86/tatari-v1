@@ -57,13 +57,42 @@
     <div class="modal-content" id="ajax_modal_view"></div>
   </div>
 </div>
+<div class="modal fadeInUp view-modal-annoucement animated " id="view-modal-data" role="dialog" aria-labelledby="view-modal-data" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="ajax_modal_announcement"></div>
+  </div>
+</div>
 
+<div class="modal fadeInUp payroll_template_modal default-modal animated " id="payroll_template_modal" role="dialog" aria-labelledby="detail-modal-data" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="ajax_modal_payroll"></div>
+  </div>
+</div>
+<div class="modal fadeInRight hourlywages_template_modal default-modal animated " id="hourlywages_template_modal" role="dialog" aria-labelledby="detail-modal-data" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="ajax_modal_hourlywages"></div>
+  </div>
+</div>
 <div class="modal fadeInUp detail_modal_data default-modal animated " id="detail_modal_data" role="dialog" aria-labelledby="detail-modal-data" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" id="ajax_modal_details"></div>
   </div>
 </div>
-
+<div class="modal fadeInRight emo_monthly_pay animated " id="emo_monthly_pay" role="dialog" aria-labelledby="emo_monthly_pay" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="emo_monthly_pay_aj"></div>
+  </div>
+</div>
+<div class="modal fadeInRight emo_hourly_pay animated " id="emo_hourly_pay" role="dialog" aria-labelledby="emo_hourly_pay" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="emo_hourly_pay_aj"></div>
+  </div>
+</div>
+<div class="modal fadeInUp policy animated pulse" id="policy" role="dialog" aria-labelledby="policy" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="policy_modal"></div>
+  </div>
+</div>
 <div class="modal fadeInLeft delete-modal-file animated " role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -116,7 +145,6 @@
     </div>
   </div>
 </div>
-
 <div class="modal fadeInLeft delete-modal-timelogs animated " role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -131,9 +159,7 @@
     </div>
   </div>
 </div>
-
-
-
+<?php if($this->router->fetch_class() =='performance_maingoals'):?>
 <div class="modal fadeInLeft delete-modal-maingoals animated " role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -253,6 +279,120 @@
 
 
 
+<!-- Approve modal for maingoals kpi -->
+
+<div class="modal fadeInUp approve-modal-maingoals-kpi animated " tabindex="-1" role="dialog" aria-hidden="true">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <div class="modal-header"> <?php echo form_button(array('aria-label' => 'Close', 'data-dismiss' => 'modal', 'type' => 'button', 'class' => 'close', 'content' => '<span aria-hidden="true">×</span>')); ?> <strong class="modal-title"><?php echo $this->lang->line('kpi_confirm_approve_maingoals');?></strong> </div>
+
+      <div class="modal-footer">
+
+        <?php $attributes = array('name' => 'approve_maingoals_kpi', 'id' => 'approve_maingoals_kpi', 'autocomplete' => 'off', 'role'=>'form');?>
+
+        <?php $hidden = array('_method' => 'DELETE', '_token' => '000');?>
+
+        <?php echo form_open('', $attributes, $hidden);?> 
+
+    <?php
+
+    $del_token = array(
+
+      'type'  => 'hidden',
+
+      'id'  => 'token_type',
+
+      'name'  => 'token_type',
+
+      'value' => 0,
+
+    );
+
+    echo form_input($del_token);
+
+    ?>
+
+    <?php echo form_button(array('data-dismiss' => 'modal', 'type' => 'button', 'class' => 'btn btn-secondary', 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_close'))); ?> 
+
+    <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_confirm_del'))); ?> <?php echo form_close(); ?> </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- Approve modal for variable kpi -->
+
+<div class="modal fadeInUp approve-modal-variable-kpi animated " tabindex="-1" role="dialog" aria-hidden="true">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <div class="modal-header"> <?php echo form_button(array('aria-label' => 'Close', 'data-dismiss' => 'modal', 'type' => 'button', 'class' => 'close', 'content' => '<span aria-hidden="true">×</span>')); ?> <strong class="modal-title"><?php echo $this->lang->line('kpi_confirm_approve_variable');?></strong> </div>
+
+      <div class="modal-footer">
+
+        <?php $attributes = array('name' => 'approve_variable_kpi', 'id' => 'approve_variable_kpi', 'autocomplete' => 'off', 'role'=>'form');?>
+
+        <?php $hidden = array('_method' => 'DELETE', '_token' => '000');?>
+
+        <?php echo form_open('', $attributes, $hidden);?> 
+
+    <?php
+
+    $del_token = array(
+
+      'type'  => 'hidden',
+
+      'id'  => 'token_type',
+
+      'name'  => 'token_type',
+
+      'value' => 0,
+
+    );
+
+    echo form_input($del_token);
+
+    ?>
+
+    <?php echo form_button(array('data-dismiss' => 'modal', 'type' => 'button', 'class' => 'btn btn-secondary', 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_close'))); ?> 
+
+    <?php echo form_button(array('name' => 'tatari_form', 'type' => 'submit', 'class' => $this->Tat_model->form_button_class(), 'content' => '<i class="fa fa fa-check-square-o"></i> '.$this->lang->line('tat_confirm_del'))); ?> <?php echo form_close(); ?> </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+<!-- Maingoals edit modal-->
+
+<div class="modal fadeInRight edit-modal-maingoals-data animated " id="edit-modal-maingoals-data" tabindex="-1" role="dialog" aria-labelledby="edit-modal-maingoals-data" aria-hidden="true">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content" id="ajax_modal_maingoals"></div>
+
+  </div>
+
+</div>
+
+
+
+<!-- Variable edit modal-->
+
 <div class="modal fadeInRight edit-modal-variable-data animated " id="edit-modal-variable-data" tabindex="-1" role="dialog" aria-labelledby="edit-modal-variable-data" aria-hidden="true">
 
   <div class="modal-dialog">
@@ -265,6 +405,7 @@
 
 
 
+<!-- Incidental edit modal-->
 
 <div class="modal fadeInRight edit-modal-incidental-data animated " id="edit-modal-incidental-data" tabindex="-1" role="dialog" aria-labelledby="edit-modal-incidental-data" aria-hidden="true">
 
@@ -275,3 +416,4 @@
   </div>
 
 </div>
+<?php endif;?>

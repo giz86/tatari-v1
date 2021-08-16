@@ -111,6 +111,21 @@ $(document).ready(function(){
 <script type="text/javascript" src="<?php echo base_url();?>assets/tatari_assets/js/buttons.print.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url().'assets/tatari_assets/scripts/'.$path_url.'.js'; ?>"></script>
 
+<?php if($this->router->fetch_class() =='dashboard') { ?>
+	<?php if($system[0]->is_ssl_available=='yes'){?>
+	<script src="<?php echo base_url();?>assets/tatari_assets/scripts/user/set_clocking_ssl.js"></script>
+    <?php } else {?>
+    <script src="<?php echo base_url();?>assets/tatari_assets/scripts/user/set_clocking_non_ssl.js"></script>
+    <?php } ?>
+<?php } ?>
+
+<?php if($user[0]->user_role_id==1 && $this->router->fetch_class() =='dashboard'):?>
+	<!-- Department and Designation Pie Charts -->
+    <script src="<?php echo base_url();?>assets/tatari_assets/vendor/charts/chart.min.js" type="text/javascript"></script>    
+    <script src="<?php echo base_url();?>assets/tatari_assets/scripts/xchart/employee_department.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>assets/tatari_assets/scripts/xchart/employee_designation.js" type="text/javascript"></script>
+<?php endif; ?>
+
 <script>
   function testAnim(x) {
     $('#animationSandbox').removeClass().addClass(x + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){

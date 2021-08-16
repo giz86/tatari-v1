@@ -69,14 +69,14 @@ if(!is_null($role_user)){
                   <?php } ?>
                   
                   <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/profile?change_password=true');?>"> <i class="fa fa-key"></i>Change Password</a></li>
+                  <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/profile?change_password=true');?>"> <i class="fa fa-key"></i><?php echo $this->lang->line('header_change_password');?></a></li>
                   <li class="divider"></li>
                   <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href=""> <i class="fa fa-lock"></i>Lock User</a></li>
+                  <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/auth/lock');?>"> <i class="fa fa-lock"></i><?php echo $this->lang->line('tat_lock_user');?></a></li>
                   <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/logout');?>"> <i class="fa fa-power-off text-red"></i>Sign Out</a></li>
-                </ul>
-          </li>
+                  <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/logout');?>"> <i class="fa fa-power-off text-red"></i><?php echo $this->lang->line('header_sign_out');?></a></li>
+                  </ul>
+                </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
             <a href="#" data-toggle="control-sidebar" title="Layout Settings"><i class="fa fa-cog fa-spin"></i></a>

@@ -215,7 +215,17 @@
                     </select>
                   </div>
                 </div>
-             
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="office_shift_id" class="control-label"><?php echo $this->lang->line('tat_employee_office_shift');?></label>
+                    <select class="form-control" name="office_shift_id" data-plugin="select_hrm" data-placeholder="<?php echo $this->lang->line('tat_employee_office_shift');?>">
+                      <?php foreach($all_office_shifts as $shift) {?>
+                      <option value="<?php echo $shift->office_shift_id?>"><?php echo $shift->shift_name?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
+                </div>
+            
               </div>
               <div class="row">
                 <div class="col-md-6">
@@ -251,7 +261,17 @@
                 </select>
               </div>
             </div>
-            
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="tat_hr_leave_cat"><?php echo $this->lang->line('tat_hr_leave_cat');?></label>
+                <input type="hidden" name="leave_categories[]" value="0" />
+                <select multiple="multiple" class="form-control" name="leave_categories[]" data-plugin="select_tat" data-placeholder="<?php echo $this->lang->line('tat_hr_leave_cat');?>">
+                  <?php foreach($all_leave_types as $leave_type) {?>
+                  <option value="<?php echo $leave_type->leave_type_id?>"><?php echo $leave_type->type_name?></option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="address"><?php echo $this->lang->line('tat_employee_address');?></label>

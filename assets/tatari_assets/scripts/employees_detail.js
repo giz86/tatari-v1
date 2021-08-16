@@ -1,30 +1,25 @@
 $(document).ready(function(){			
 	
-	// get data
 	$('.edit-modal-data').on('show.bs.modal', function (event) {
 		var button = $(event.relatedTarget);
 		var field_id = button.data('field_id');
 		var field_tpe = button.data('field_type');
-		if(field_tpe == 'contact'){
-			var field_add = '&data=emp_contact&type=emp_contact&';
-		} else if(field_tpe == 'document'){
+		if(field_tpe == 'document'){
 			var field_add = '&data=emp_document&type=emp_document&';
+		} else if(field_tpe == 'contact'){
+			var field_add = '&data=emp_contact&type=emp_contact&';
 		} else if(field_tpe == 'qualification'){
 			var field_add = '&data=emp_qualification&type=emp_qualification&';
 		} else if(field_tpe == 'work_experience'){
 			var field_add = '&data=emp_work_experience&type=emp_work_experience&';
 		} else if(field_tpe == 'bank_account'){
 			var field_add = '&data=emp_bank_account&type=emp_bank_account&';
-		} else if(field_tpe == 'contract'){
-			var field_add = '&data=emp_contract&type=emp_contract&';
 		} else if(field_tpe == 'leave'){
 			var field_add = '&data=emp_leave&type=emp_leave&';
 		} else if(field_tpe == 'shift'){
 			var field_add = '&data=emp_shift&type=emp_shift&';
-		}  else if(field_tpe == 'location'){
+		} else if(field_tpe == 'location'){
 			var field_add = '&data=emp_location&type=emp_location&';
-		} else if(field_tpe == 'imgdocument'){
-			var field_add = '&data=e_imgdocument&type=e_imgdocument&';
 		} else if(field_tpe == 'salary_allowance'){
 			var field_add = '&data=e_salary_allowance&type=e_salary_allowance&';
 		} else if(field_tpe == 'salary_loan'){
@@ -37,9 +32,7 @@ $(document).ready(function(){
 			var field_add = '&data=salary_statutory_deductions_info&type=salary_statutory_deductions_info&';
 		} else if(field_tpe == 'salary_other_payments'){
 			var field_add = '&data=salary_other_payments_info&type=salary_other_payments_info&';
-		} else if(field_tpe == 'security_level'){
-			var field_add = '&data=esecurity_level_info&type=esecurity_level_info&';
-		}
+		} 
 		var modal = $(this);
 		$.ajax({
 			url: site_url+'employees/dialog_'+field_tpe+'/',
@@ -72,6 +65,7 @@ $(document).ready(function(){
 	}
 		
 	});
+
 	/* Update basic info */
 	$("#basic_info").submit(function(e){
 	var fd = new FormData(this);
@@ -83,8 +77,7 @@ $(document).ready(function(){
 	e.preventDefault();
 	$('.icon-spinner3').show();
 	$('.save').prop('disabled', true);
-	//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 	$.ajax({
 		url: e.target.action,
 		type: "POST",
@@ -95,15 +88,13 @@ $(document).ready(function(){
 		success: function(JSON)
 		{
 			if (JSON.error != '') {
-				//toastr.clear();
-//$('#tatload-img').hide();
+
 				toastr.error(JSON.error);
 				$('.icon-spinner3').hide();
 				$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 				$('.save').prop('disabled', false);
 			} else {
-				//toastr.clear();
-//$('#tatload-img').hide();
+			
 				toastr.success(JSON.result);
 				$('.icon-spinner3').hide();
 				$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
@@ -112,8 +103,7 @@ $(document).ready(function(){
 		},
 		error: function() 
 		{
-			//toastr.clear();
-//$('#tatload-img').hide();
+
 			toastr.error(JSON.error);
 			$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 			$('.icon-spinner3').hide();
@@ -122,7 +112,7 @@ $(document).ready(function(){
    });
  });  
    $("#basic_infoddd").submit(function(e){
-	/*Form Submit*/
+	
 	e.preventDefault();
 		var obj = $(this), action = obj.attr('name');
 		$('.save').prop('disabled', true);
@@ -134,15 +124,13 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('.icon-spinner3').hide();
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					$('.save').prop('disabled', false);
 				} else {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.success(JSON.result);
 					$('.icon-spinner3').hide();
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
@@ -151,7 +139,7 @@ $(document).ready(function(){
 			}
 		});
 	});
-	// get current val
+
 	$(".basic_salary").keyup(function(e){
 		var to_currency_rate = $('#to_currency_rate').val();
 		var curr_val = $(this).val();
@@ -167,16 +155,6 @@ $(document).ready(function(){
 		$('#current_cur_val2').html(float_val);
 	});	
 	
-	/*jQuery("#wages_type").change(function(){
-		var wopt = $(this).val();
-		if(wopt == 1){
-			$('#deduct_options').show();
-			$('#half_monthly_is').show();
-		} else {
-			$('#deduct_options').hide();
-			$('#half_monthly_is').hide();
-		}
-	});*/
 	
 	/* Update profile picture */
 	$("#f_profile_picture").submit(function(e){
@@ -191,8 +169,7 @@ $(document).ready(function(){
 		fd.append("form", action);
 		e.preventDefault();
 		$('.save').prop('disabled', true);
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		$.ajax({
 			url: e.target.action,
 			type: "POST",
@@ -203,15 +180,13 @@ $(document).ready(function(){
 			success: function(JSON)
 			{
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('.save').prop('disabled', false);
 					$('.icon-spinner3').hide();
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 				} else {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.success(JSON.result);
 					$('.icon-spinner3').hide();
 					$('#remove_file').show();
@@ -236,46 +211,8 @@ $(document).ready(function(){
 	   });
 	});
 	
-	/* Update social networking */
-	$("#f_social_networking").submit(function(e){
-	/*Form Submit*/
-	e.preventDefault();
-		var obj = $(this), action = obj.attr('name');
-		$('.save').prop('disabled', true);
-		$('.icon-spinner3').show();
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
-		$.ajax({
-			type: "POST",
-			url: e.target.action,
-			data: obj.serialize()+"&is_ajax=3&data=social_info&type=social_info&form="+action,
-			cache: false,
-			success: function (JSON) {
-				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
-					toastr.error(JSON.error);
-					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
-					$('.icon-spinner3').hide();
-					$('.save').prop('disabled', false);
-				} else {
-					//toastr.clear();
-//$('#tatload-img').hide();
-					toastr.success(JSON.result);
-					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
-					$('.icon-spinner3').hide();
-					$('.save').prop('disabled', false);
-				}
-			}
-		});
-	});
 
-	// get departments
-	/*jQuery("#aj_company").change(function(){
-		jQuery.get(base_url+"/get_departments/"+jQuery(this).val(), function(data, status){
-			jQuery('#department_ajax').html(data);
-		});
-	});*/
+
 	jQuery("#aj_company").change(function(){
 		jQuery.get(escapeHtmlSecure(base_url+"/get_company_elocations/"+jQuery(this).val()), function(data, status){
 			jQuery('#location_ajax').html(data);
@@ -349,18 +286,7 @@ $(document).ready(function(){
 		}
     });
 	
-	// On page load > documents
-	var tat_table_immigration = $('#tat_table_imgdocument').dataTable({
-        "bDestroy": true,
-		"ajax": {
-            url : site_url+"employees/immigration/"+$('#user_id').val(),
-            type : 'GET'
-        },
-		"fnDrawCallback": function(settings){
-		$('[data-toggle="tooltip"]').tooltip();          
-		}
-    });
-	
+
 	// On page load > documents
 	var tat_table_document = $('#tat_table_document').dataTable({
         "bDestroy": true,
@@ -408,29 +334,7 @@ $(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip();          
 		}
     });
-	// On page load 
-	var tat_table_security_level = $('#tat_table_security_level').dataTable({
-        "bDestroy": true,
-		"ajax": {
-            url : site_url+"employees/security_level_list/"+$('#user_id').val(),
-            type : 'GET'
-        },
-		"fnDrawCallback": function(settings){
-		$('[data-toggle="tooltip"]').tooltip();          
-		}
-    });
-	
-	// On page load > contract
-	var tat_table_contract = $('#tat_table_contract').dataTable({
-        "bDestroy": true,
-		"ajax": {
-            url : site_url+"employees/contract/"+$('#user_id').val(),
-            type : 'GET'
-        },
-		"fnDrawCallback": function(settings){
-		$('[data-toggle="tooltip"]').tooltip();          
-		}
-    });
+
 	
 	// On page load > leave
 	var tat_table_leave = $('#tat_table_leave').dataTable({
@@ -533,17 +437,17 @@ $(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip();          
 		}
     });
+
 	// On page load > tat_tatari_table
 	
 	$('.tat_tatari_table').DataTable();
 	/* Add contact info */
 	jQuery("#contact_info").submit(function(e){
-	/*Form Submit*/
+
 	e.preventDefault();
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save').prop('disabled', true);
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -551,19 +455,17 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					jQuery('.save').prop('disabled', false);
 				} else {
 					tat_table_contact.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
-					jQuery('#contact_info')[0].reset(); // To reset form fields
+					jQuery('#contact_info')[0].reset(); 
 					jQuery('.save').prop('disabled', false);
 				}
 			}
@@ -577,8 +479,7 @@ $(document).ready(function(){
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save2').prop('disabled', true);
 		$('.icon-spinner33').show();
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -586,15 +487,13 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					$('.icon-spinner33').hide();
 					jQuery('.save2').prop('disabled', false);
 				} else {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.success(JSON.result);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					$('.icon-spinner33').hide();
@@ -615,8 +514,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		$('.icon-spinner3').show();
 		$('.save').prop('disabled', true);
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		$.ajax({
 			url: e.target.action,
 			type: "POST",
@@ -627,16 +525,14 @@ $(document).ready(function(){
 			success: function(JSON)
 			{
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					$('.save').prop('disabled', false);
 					$('.icon-spinner3').hide();
 				} else {
 					tat_table_document.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
@@ -647,64 +543,13 @@ $(document).ready(function(){
 			},
 			error: function() 
 			{
-				//toastr.clear();
-//$('#tatload-img').hide();
+
 				toastr.error(JSON.error);
 				$('.save').prop('disabled', false);
 			} 	        
 	   });
 	});
 	
-	/* Add document info */
-	$("#immigration_info").submit(function(e){
-		var fd = new FormData(this);
-		var obj = $(this), action = obj.attr('name');
-		fd.append("is_ajax", 7);
-		fd.append("type", 'immigration_info');
-		fd.append("data", 'immigration_info');
-		fd.append("form", action);
-		e.preventDefault();
-		$('.icon-spinner3').show();
-		$('.save').prop('disabled', true);
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
-		$.ajax({
-			url: e.target.action,
-			type: "POST",
-			data:  fd,
-			contentType: false,
-			cache: false,
-			processData:false,
-			success: function(JSON)
-			{
-				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
-					toastr.error(JSON.error);
-					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
-					$('.save').prop('disabled', false);
-					$('.icon-spinner3').hide();
-				} else {
-					tat_table_immigration.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
-						toastr.success(JSON.result);
-						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
-					}, true);
-					$('.icon-spinner3').hide();
-					jQuery('#document_info')[0].reset(); // To reset form fields
-					$('.save').prop('disabled', false);
-				}
-			},
-			error: function() 
-			{
-				//toastr.clear();
-//$('#tatload-img').hide();
-				toastr.error(JSON.error);
-				$('.save').prop('disabled', false);
-			} 	        
-	   });
-	});
 	
 	/* Add qualification info */
 	jQuery("#qualification_info").submit(function(e){
@@ -713,8 +558,7 @@ $(document).ready(function(){
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save').prop('disabled', true);
 		$('.icon-spinner3').show();
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -722,20 +566,18 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					jQuery('.save').prop('disabled', false);
 					$('.icon-spinner3').hide();
 				} else {
 					tat_table_qualification.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+	
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
-					jQuery('#qualification_info')[0].reset(); // To reset form fields
+					jQuery('#qualification_info')[0].reset(); 
 					$('.icon-spinner3').hide();
 					jQuery('.save').prop('disabled', false);
 				}
@@ -750,8 +592,7 @@ $(document).ready(function(){
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save').prop('disabled', true);
 		$('.icon-spinner3').show();
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -759,21 +600,19 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					jQuery('.save').prop('disabled', false);
 					$('.icon-spinner3').hide();
 				} else {
 					tat_table_work_experience.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
 					$('.icon-spinner3').hide();
-					jQuery('#work_experience_info')[0].reset(); // To reset form fields
+					jQuery('#work_experience_info')[0].reset(); 
 					jQuery('.save').prop('disabled', false);
 				}
 			}
@@ -787,8 +626,7 @@ $(document).ready(function(){
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save').prop('disabled', true);
 		$('.icon-spinner3').show();
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -796,16 +634,14 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('.icon-spinner3').hide();
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					jQuery('.save').prop('disabled', false);
 				} else {
 					tat_table_bank_account.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
@@ -816,78 +652,15 @@ $(document).ready(function(){
 			}
 		});
 	});
-	jQuery("#security_level_info").submit(function(e){
-	/*Form Submit*/
-	e.preventDefault();
-		var obj = jQuery(this), action = obj.attr('name');
-		jQuery('.save').prop('disabled', true);
-		$('.icon-spinner3').show();
-		jQuery.ajax({
-			type: "POST",
-			url: e.target.action,
-			data: obj.serialize()+"&is_ajax=16&data=security_level_info&type=security_level_info&form="+action,
-			cache: false,
-			success: function (JSON) {
-				if (JSON.error != '') {
-					toastr.error(JSON.error);
-					$('.icon-spinner3').hide();
-					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
-					jQuery('.save').prop('disabled', false);
-				} else {
-					tat_table_security_level.api().ajax.reload(function(){ 
-						toastr.success(JSON.result);
-						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
-					}, true);
-					$('.icon-spinner3').hide();
-					jQuery('#security_level_info')[0].reset(); // To reset form fields
-					jQuery('.save').prop('disabled', false);
-				}
-			}
-		});
-	});
-	
-	/* Add contract info */
-	jQuery("#contract_info").submit(function(e){
-	/*Form Submit*/
-	e.preventDefault();
-		var obj = jQuery(this), action = obj.attr('name');
-		jQuery('.save').prop('disabled', true);
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
-		jQuery.ajax({
-			type: "POST",
-			url: e.target.action,
-			data: obj.serialize()+"&is_ajax=19&data=contract_info&type=contract_info&form="+action,
-			cache: false,
-			success: function (JSON) {
-				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
-					toastr.error(JSON.error);
-					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
-					jQuery('.save').prop('disabled', false);
-				} else {
-					tat_table_contract.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
-						toastr.success(JSON.result);
-						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
-					}, true);
-					jQuery('#contract_info')[0].reset(); // To reset form fields
-					jQuery('.save').prop('disabled', false);
-				}
-			}
-		});
-	});
-	
+
+
 	/* Add leave info */
 	jQuery("#leave_info").submit(function(e){
 	/*Form Submit*/
 	e.preventDefault();
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save').prop('disabled', true);
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -895,19 +668,17 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					jQuery('.save').prop('disabled', false);
 				} else {
 					tat_table_leave.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
-					jQuery('#leave_info')[0].reset(); // To reset form fields
+					jQuery('#leave_info')[0].reset(); 
 					jQuery('.save').prop('disabled', false);
 				}
 			}
@@ -920,8 +691,7 @@ $(document).ready(function(){
 	e.preventDefault();
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save').prop('disabled', true);
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -929,19 +699,17 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					jQuery('.save').prop('disabled', false);
 				} else {
 					tat_table_shift.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
-					jQuery('#shift_info')[0].reset(); // To reset form fields
+					jQuery('#shift_info')[0].reset(); 
 					jQuery('.save').prop('disabled', false);
 				}
 			}
@@ -954,8 +722,7 @@ $(document).ready(function(){
 	e.preventDefault();
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save').prop('disabled', true);
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -963,19 +730,17 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					jQuery('.save').prop('disabled', false);
 				} else {
 					tat_table_location.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
-					jQuery('#location_info')[0].reset(); // To reset form fields
+					jQuery('#location_info')[0].reset(); 
 					jQuery('.save').prop('disabled', false);
 				}
 			}
@@ -989,8 +754,7 @@ $(document).ready(function(){
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save').prop('disabled', true);
 		$('.icon-spinner3').show();
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -998,15 +762,13 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					jQuery('.save').prop('disabled', false);
 					$('.icon-spinner3').hide();
 				} else {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.success(JSON.result);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					$('.icon-spinner3').hide();
@@ -1024,8 +786,7 @@ $(document).ready(function(){
 		var obj = $(this), action = obj.attr('name');
 		$('.save').prop('disabled', true);
 		$('.icon-spinner3').show();
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		$.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -1033,15 +794,13 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					$('.icon-spinner3').hide();
 					$('.save').prop('disabled', false);
 				} else {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.success(JSON.result);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					$('.icon-spinner3').hide();
@@ -1050,6 +809,7 @@ $(document).ready(function(){
 			}
 		});
 	});
+
 	// add loan
 	$("#add_loan_info").submit(function(e){
 	/*Form Submit*/
@@ -1057,8 +817,7 @@ $(document).ready(function(){
 		var obj = $(this), action = obj.attr('name');
 		$('.save').prop('disabled', true);
 		$('.icon-spinner3').show();
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		$.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -1066,22 +825,20 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					$('.icon-spinner3').hide();
 					$('.save').prop('disabled', false);
 				} else {
 					tat_table_all_deductions.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					$('.icon-spinner3').hide();
-					jQuery('#add_loan_info')[0].reset(); // To reset form fields
+					jQuery('#add_loan_info')[0].reset(); 
 					$('.save').prop('disabled', false);
 				}
 			}
@@ -1094,8 +851,7 @@ $(document).ready(function(){
 	e.preventDefault();
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save').prop('disabled', true);
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -1103,32 +859,30 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					jQuery('.save').prop('disabled', false);
 				} else {
 					tat_table_allowances_ad.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
-					jQuery('#employee_update_allowance')[0].reset(); // To reset form fields
+					jQuery('#employee_update_allowance')[0].reset(); 
 					jQuery('.save').prop('disabled', false);
 				}
 			}
 		});
 	});
+	
 	/* */
 	jQuery("#employee_update_commissions").submit(function(e){
 	/*Form Submit*/
 	e.preventDefault();
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save').prop('disabled', true);
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -1136,15 +890,13 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					jQuery('.save').prop('disabled', false);
 				} else {
 					tat_table_commissions_ad.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
@@ -1154,13 +906,13 @@ $(document).ready(function(){
 			}
 		});
 	});
+
 	jQuery("#statutory_deductions_info").submit(function(e){
 	/*Form Submit*/
 	e.preventDefault();
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save').prop('disabled', true);
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -1168,15 +920,13 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					jQuery('.save').prop('disabled', false);
 				} else {
 					tat_table_statutory_deductions_ad.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
@@ -1186,13 +936,13 @@ $(document).ready(function(){
 			}
 		});
 	});
+
 	jQuery("#other_payments_info").submit(function(e){
 	/*Form Submit*/
 	e.preventDefault();
 		var obj = jQuery(this), action = obj.attr('name');
 		jQuery('.save').prop('disabled', true);
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		jQuery.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -1200,24 +950,23 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					jQuery('.save').prop('disabled', false);
 				} else {
 					tat_table_other_payments_ad.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 						$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					}, true);
-					jQuery('#other_payments_info')[0].reset(); // To reset form fields
+					jQuery('#other_payments_info')[0].reset(); 
 					jQuery('.save').prop('disabled', false);
 				}
 			}
 		});
 	});
+
 	/* */
 	$("#overtime_info").submit(function(e){
 	/*Form Submit*/
@@ -1225,8 +974,7 @@ $(document).ready(function(){
 		var obj = $(this), action = obj.attr('name');
 		$('.save').prop('disabled', true);
 		$('.icon-spinner3').show();
-		//$('#tatload-img').show();
-//toastr.info(processing_request);
+
 		$.ajax({
 			type: "POST",
 			url: e.target.action,
@@ -1234,38 +982,31 @@ $(document).ready(function(){
 			cache: false,
 			success: function (JSON) {
 				if (JSON.error != '') {
-					//toastr.clear();
-//$('#tatload-img').hide();
+
 					toastr.error(JSON.error);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					$('.icon-spinner3').hide();
 					$('.save').prop('disabled', false);
 				} else {
 					tat_table_emp_overtime.api().ajax.reload(function(){ 
-						//toastr.clear();
-//$('#tatload-img').hide();
+
 						toastr.success(JSON.result);
 					}, true);
 					$('input[name="csrf_tatari"]').val(JSON.csrf_hash);
 					$('.icon-spinner3').hide();
-					jQuery('#overtime_info')[0].reset(); // To reset form fields
+					jQuery('#overtime_info')[0].reset(); 
 					$('.save').prop('disabled', false);
 				}
 			}
 		});
 	});
+
    $('.view-modal-data').on('show.bs.modal', function (event) {
 		var button = $(event.relatedTarget);
 		var xfield_id = button.data('xfield_id');
 		var field_type = button.data('field_type');
 		var field_key = '';
-		if(field_type == 'awards'){
-			var view_info  = 'view_award';
-			var field_key  = 'award_id';
-		} else if(field_type == 'travel'){
-			var view_info  = 'view_travel';
-			var field_key  = 'travel_id';
-		} else if(field_type == 'transfers'){
+		if(field_type == 'transfers'){
 			var view_info  = 'view_transfer';
 			var field_key  = 'transfer_id';
 		} else if(field_type == 'promotion'){
@@ -1290,6 +1031,7 @@ $(document).ready(function(){
 		}
 		});
 	});
+
    /* Delete data */
 	$("#delete_record").submit(function(e){
 	var tk_type = $('#token_type').val();
@@ -1307,9 +1049,6 @@ $(document).ready(function(){
 		var tb_name = 'tat_table_'+tk_type;
 	} else if(tk_type == 'bank_account'){
 		var field_add = '&is_ajax=18&data=delete_record&type=delete_bank_account&';
-		var tb_name = 'tat_table_'+tk_type;
-	} else if(tk_type == 'contract'){
-		var field_add = '&is_ajax=21&data=delete_record&type=delete_contract&';
 		var tb_name = 'tat_table_'+tk_type;
 	} else if(tk_type == 'leave'){
 		var field_add = '&is_ajax=24&data=delete_record&type=delete_leave&';
@@ -1341,13 +1080,7 @@ $(document).ready(function(){
 	} else if(tk_type == 'all_other_payments'){
 		var field_add = '&is_ajax=30&data=delete_record&type=delete_all_other_payments&';
 		var tb_name = 'tat_table_'+tk_type;
-	} else if(tk_type == 'security_level'){
-		var field_add = '&is_ajax=30&data=delete_record&type=delete_security_level&';
-		var tb_name = 'tat_table_'+tk_type;
-	} else if(tk_type == 'training_info'){
-		var field_add = '&is_ajax=30&data=delete_record&type=delete_training_info&';
-		var tb_name = 'tat_table_'+tk_type;
-	}
+	} 
 	
 	/*Form Submit*/
 	e.preventDefault();
@@ -1371,6 +1104,7 @@ $(document).ready(function(){
 			}
 		});
 	});   
+
    /// delete a record
 	$( document ).on( "click", ".delete", function() {
 		$('input[name=_token]').val($(this).data('record-id'));
@@ -1378,6 +1112,7 @@ $(document).ready(function(){
 		$('#delete_record').attr('action',site_url+'employees/delete_'+$(this).data('token_type')+'/'+$(this).data('record-id'));
 	});
 });	
+
 $(document).ready(function(){
 	
 	$('[data-plugin="select_tat"]').select2($(this).attr('data-options'));

@@ -43,7 +43,7 @@ endif;
 <link media="all" type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/tatari_assets/css/tatari/animate.css">
 <link media="all" type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/tatari_assets/css/tatari/tat_login_1.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<link rel="stylesheet" href="<?php echo base_url();?>assets/fonts/font2.css">
 </head>
 
 <body 
@@ -111,7 +111,7 @@ echo $auth_bg;
                         </div>
                         <div class="col-xs-6 col-sm-6">
                           <p class="forgotPwd">
-                            <a href="" class="lnk-toggler">Forgot Password</a>
+                            <a href="<?php echo site_url('admin/auth/forgot_password');?>" class="lnk-toggler"><?php echo $this->lang->line('tat_forgot_password_link');?></a>
                           </p>
                         </div>
                       </div> <!-- ./remember-row -->

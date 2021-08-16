@@ -13,6 +13,8 @@ class Dashboard extends MY_Controller {
 		  $this->load->model('Department_model');
 		  $this->load->model('Employees_model');
 		  $this->load->model('Tat_model');
+		  $this->load->model('Aux_model');
+		  $this->load->model('Attendance_model');
      }
 	
 
@@ -71,7 +73,7 @@ class Dashboard extends MY_Controller {
 			
 			);
 			$data['subview'] = $this->load->view('admin/dashboard/index', $data, TRUE);
-			$this->load->view('admin/layout/layout_main', $data); //page load
+			$this->load->view('admin/layout/layout_main', $data);
 		} else {
 	
 		$user = $this->Tat_model->read_user_info($session['user_id']);
@@ -95,9 +97,88 @@ class Dashboard extends MY_Controller {
 			'last_four_employees' => $this->Tat_model->last_four_employees(),
 			);
 			$data['subview'] = $this->load->view('admin/dashboard/index', $data, TRUE);
-			$this->load->view('admin/layout/layout_main', $data); //page load
+			$this->load->view('admin/layout/layout_main', $data); 
 		}
 	}
+
+	// Department Wheel Chart Model
+	public function employee_department()
+	{
+		$Return = array('chart_data'=>'', 'c_name'=>'', 'd_rows'=>'','c_color'=>'');
+		$c_name = array();
+		$c_am = array();	
+		$c_color = array('#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC','#00A5A8','#FF4558','#16D39A','#8A2BE2','#D2691E','#6495ED','#DC143C','#006400','#556B2F','#9932CC');
+		$someArray = array();
+		$j=0;
+		foreach($this->Department_model->all_departments() as $department) {
+		
+			$condition = "department_id =" . "'" . $department->department_id . "'";
+			$this->db->select('*');
+			$this->db->from('tat_employees');
+			$this->db->where($condition);
+			$this->db->group_by('location_id');
+			$query = $this->db->get();
+			$checke  = $query->result();
+			
+			if ($query->num_rows() > 0) {
+				$row = $query->num_rows();
+				$d_rows [] = $row;	
+				$c_name[] = htmlspecialchars_decode($department->department_name);
+		
+				$someArray[] = array(
+				  'label'   => htmlspecialchars_decode($department->department_name),
+				  'value' => $row,
+				  'bgcolor' => $c_color[$j]
+				  );
+				  $j++;
+			}
+		}
+		$Return['c_name'] = $c_name;
+		$Return['d_rows'] = $d_rows;
+		$Return['chart_data'] = $someArray;
+		$this->output($Return);
+		exit;
+	}
+
+	// Designation Pie Chart Model
+	public function employee_designation()
+	{
+		
+		$Return = array('chart_data'=>'', 'c_name'=>'', 'd_rows'=>'','c_color'=>'');
+		$c_name = array();
+		$c_am = array();	
+		$c_color = array('#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED','#9932CC','#556B2F','#16D39A','#DC143C','#D2691E','#8A2BE2','#FF976A','#FF4558','#00A5A8','#6495ED');
+		$someArray = array();
+		$j=0;
+		foreach($this->Designation_model->all_designations() as $designation) {
+		
+			$condition = "designation_id =" . "'" . $designation->designation_id . "'";
+			$this->db->select('*');
+			$this->db->from('tat_employees');
+			$this->db->where($condition);
+			$this->db->group_by('location_id');
+			$query = $this->db->get();
+			$checke  = $query->result();
+			
+			if ($query->num_rows() > 0) {
+				$row = $query->num_rows();
+				$d_rows [] = $row;	
+				$c_name[] = htmlspecialchars_decode($designation->designation_name);
+				$someArray[] = array(
+				  'label'   => htmlspecialchars_decode($designation->designation_name),
+				  'value' => $row,
+				  'bgcolor' => $c_color[$j]
+				  );
+				  $j++;
+			}
+		}
+		$Return['c_name'] = $c_name;
+		$Return['d_rows'] = $row;
+		$Return['chart_data'] = $someArray;
+		$this->output($Return);
+		exit;
+	}
+	
 	
 
 }

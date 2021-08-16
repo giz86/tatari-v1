@@ -6,13 +6,13 @@ class Transfers extends MY_Controller {
 	
 	 public function __construct() {
         parent::__construct();
+		$this->load->library('email');
 
 		$this->load->model("Transfers_model");
-		$this->load->model("Tat_model");
-		$this->load->library('email');
 		$this->load->model("Department_model");
 		$this->load->model("Location_model");
 		$this->load->model("Company_model");
+		$this->load->model("Tat_model");
 	}
 	
 
