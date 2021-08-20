@@ -74,7 +74,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=localhost;dbname=tatari_new_v2',
+	'dsn'	=> 'mysql:host=localhost;dbname=tatari',
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
