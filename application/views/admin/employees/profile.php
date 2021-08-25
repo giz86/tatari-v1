@@ -6,9 +6,9 @@
 <?php $de_file = base_url().'uploads/profile/'.$profile_picture;?>
 <?php } else {?>
 <?php if($gender=='Male') { ?>
-<?php $de_file = base_url().'uploads/profile/default_male.jpg';?>
+<?php $de_file = base_url().'uploads/profile/default_male.png';?>
 <?php } else { ?>
-<?php $de_file = base_url().'uploads/profile/default_female.jpg';?>
+<?php $de_file = base_url().'uploads/profile/default_female.png';?>
 <?php } ?>
 <?php } ?>
 
@@ -190,9 +190,9 @@
                             <img src="<?php echo site_url().'uploads/profile/'.$profile_picture;?>" width="50px" style="margin-left:20px;" id="u_file">
                             <?php } else {?>
                             <?php if($gender=='Male') { ?>
-                            <?php $de_file = site_url().'uploads/profile/default_male.jpg';?>
+                            <?php $de_file = site_url().'uploads/profile/default_male.png';?>
                             <?php } else { ?>
-                            <?php $de_file = site_url().'uploads/profile/default_female.jpg';?>
+                            <?php $de_file = site_url().'uploads/profile/default_female.png';?>
                             <?php } ?>
                             <img src="<?php echo $de_file;?>" width="50px" style="margin-left:20px;" id="u_file">
                             <?php } ?>

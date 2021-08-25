@@ -153,11 +153,11 @@
                   <label for="description"><?php echo $this->lang->line('tat_remarks');?></label>
                   <textarea class="form-control textarea" placeholder="<?php echo $this->lang->line('tat_remarks');?>" name="remarks" rows="5"></textarea>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>
                   <input type="checkbox" class="minimal" value="1" id="leave_half_day" name="leave_half_day">
-				  <?php echo $this->lang->line('tat_hr_leave_half_day');?></span> </label>
-                </div>
+				          <?php echo $this->lang->line('tat_hr_leave_half_day');?></span> </label>
+                </div> -->
               </div>
             </div>
             <div class="row">
@@ -187,12 +187,12 @@
 <?php } ?>
 
 <div class="box <?php echo $get_animate;?>">
-  <div class="box-header with-border">
-    <h3 class="box-title"><?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('left_leave');?></h3>
-    <?php if($xuser_info[0]->user_role_id==1){ ?><div class="box-tools pull-right"> <a class="text-dark collapsed" data-toggle="collapse" href="#filter_tatari" aria-expanded="false">
+  <!-- <div class="box-header with-border">
+      <h3 class="box-title"><?php echo $this->lang->line('tat_list_all');?> <?php echo $this->lang->line('left_leave');?></h3>
+     <?php if($xuser_info[0]->user_role_id==1){ ?><div class="box-tools pull-right"> <a class="text-dark collapsed" data-toggle="collapse" href="#filter_tatari" aria-expanded="false">
         <button type="button" class="btn btn-xs btn-primary"> <span class="fa fa-filter"></span> <?php echo $this->lang->line('tat_filter');?></button>
-       </a> </div><?php } ?>
-  </div>
+         </a> </div><?php } ?>
+  </div> -->
   <div class="box-body">
     <div class="box-datatable table-responsive">
       <table class="datatables-demo table table-striped table-bordered" id="tat_table">

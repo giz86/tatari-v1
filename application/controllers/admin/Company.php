@@ -109,7 +109,7 @@ class Company extends MY_Controller {
 			} else {
 				$view = '';
 			}
-			$combhr = $edit.$view.$delete;//
+			$combhr = $edit.$view;//
 			$icname = $r->name.'<br><small class="text-muted"><i>Type: '.$type_name.'<i></i></i></small><br><small class="text-muted"><i>'.$this->lang->line('dashboard_contact').'#: '.$r->contact_number.'<i></i></i></small><br><small class="text-muted"><i>Website: '.$r->website_url.'<i></i></i></small>';
 		   $data[] = array(
 				$combhr,

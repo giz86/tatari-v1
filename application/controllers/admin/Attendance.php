@@ -1820,7 +1820,6 @@ class Attendance extends MY_Controller {
 		
 			$data[] = array(
 				$full_name,
-				$comp_name,
 				$status,
 				$tdate,
 				$clkInIp,
@@ -1840,8 +1839,115 @@ class Attendance extends MY_Controller {
 		);
 	  echo json_encode($output);
 	  exit();
+	 }
+	 
+	 public function import() {
+		$session = $this->session->userdata('username');
+		if(empty($session)){ 
+			redirect('admin/');
+		}
+		$data['title'] = $this->lang->line('left_import_attendance').' | '.$this->Tat_model->site_title();
+		$data['breadcrumbs'] = $this->lang->line('left_import_attendance');
+		$data['path_url'] = 'import_attendance';		
+		$data['all_employees'] = $this->Tat_model->all_employees();
+		$role_resources_ids = $this->Tat_model->user_role_resource();
+		if(in_array('31',$role_resources_ids)) {
+			if(!empty($session)){ 
+				$data['subview'] = $this->load->view("admin/attendance/attendance_import", $data, TRUE);
+				$this->load->view('admin/layout/layout_main', $data); 
+			} else {
+				redirect('admin/');
+			}
+		} else {
+			redirect('admin/dashboard');
+		}		  
      }
 
+	 public function import_attendance() {
+	
+		if($this->input->post('is_ajax')=='3') {		
+		$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
+		$Return['csrf_hash'] = $this->security->get_csrf_hash();
+			
+		//validate whether uploaded file is a csv file
+   		$csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
+		
+		if(empty($_FILES['file']['name'])) {
+			$Return['error'] = $this->lang->line('tat_attendance_allowed_size');
+		} else {
+			if(in_array($_FILES['file']['type'],$csvMimes)){
+				if(is_uploaded_file($_FILES['file']['tmp_name'])){
+				
+					// check file size
+					if(filesize($_FILES['file']['tmp_name']) > 512000) {
+						$Return['error'] = $this->lang->line('tat_error_attendance_import_size');
+					} else {
+					//open uploaded csv file with read only mode
+					$csvFile = fopen($_FILES['file']['tmp_name'], 'r');
+					//skip first line
+					fgetcsv($csvFile);
+					
+					//parse data from csv file line by line
+					while(($line = fgetcsv($csvFile)) !== FALSE){
+							
+						$attendance_date = $line[1];
+						$clock_in = $line[2];
+						$clock_out = $line[3];
+						$clock_in2 = $attendance_date.' '.$clock_in;
+						$clock_out2 = $attendance_date.' '.$clock_out;
+						
+						//total work
+						$total_work_cin =  new DateTime($clock_in2);
+						$total_work_cout =  new DateTime($clock_out2);
+						
+						$interval_cin = $total_work_cout->diff($total_work_cin);
+						$hours_in   = $interval_cin->format('%h');
+						$minutes_in = $interval_cin->format('%i');
+						$total_work = $hours_in .":".$minutes_in;
+						
+						$user = $this->Tat_model->read_user_by_employee_id($line[0]);
+						if(!is_null($user)){
+							$user_id = $user[0]->user_id;
+						} else {
+							$user_id = '0';
+						}
+					
+						$data = array(
+						'employee_id' => $user_id,
+						'attendance_date' => $attendance_date,
+						'clock_in' => $clock_in2,
+						'clock_out' => $clock_out2,
+						'time_late' => $clock_in2,
+						'total_work' => $total_work,
+						'early_leaving' => $clock_out2,
+						'overtime' => $clock_out2,
+						'attendance_status' => 'Present',
+						'clock_in_out' => '0'
+						);
+					$result = $this->Attendance_model->add_employee_attendance($data);
+				}					
+				//close opened csv file
+				fclose($csvFile);
+	
+				$Return['result'] = $this->lang->line('tat_success_attendance_import');
+				}
+			}else{
+				$Return['error'] = $this->lang->line('tat_error_not_attendance_import');
+			}
+		}else{
+			$Return['error'] = $this->lang->line('tat_error_invalid_file');
+		}
+		} 
+				
+		if($Return['error']!=''){
+       		$this->output($Return);
+    	}
+	
+		
+		$this->output($Return);
+		exit;
+		}
+	}
 	 
 	// Update Attendance Record
 	 public function update_attendance_list() {

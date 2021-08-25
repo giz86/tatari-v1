@@ -14,6 +14,20 @@ if(!is_null($role_user)){
 }
 ?>
 
+<?php $site_lang = $this->load->helper('language');?>
+<?php $wz_lang = $site_lang->session->userdata('site_lang');?>
+<?php
+if(!empty($wz_lang)):
+	$lang_code = $this->Tat_model->get_language_info($wz_lang);
+	$flg_icn = '<i class="fa fa-globe"></i>';
+elseif($system[0]->default_language!=''):
+	$lang_code = $this->Tat_model->get_language_info($system[0]->default_language);
+	$flg_icn = '<i class="fa fa-globe"></i>';
+else:
+	$flg_icn = '<i class="fa fa-globe"></i> ';	
+endif;
+?>
+
 <style type="text/css">
 .main-header .sidebar-toggle-tatari-chat:before {
 	content: "\f0e6";
@@ -27,9 +41,9 @@ if(!is_null($role_user)){
     <a href="<?php echo site_url('admin/dashboard/');?>" class="logo">
 
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b><img alt="ታ" src="" class="brand-logo" style="width:32px;"></b></span>
+      <span class="logo-mini"><b><img alt="tatari" src="<?php echo base_url();?>uploads/logo/fav1.png ?>" class="brand-logo" style="width:32px;"></b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><img alt="ታ" src="" class="brand-logo" style="width:32px;"> <b>TATARI</b></span>
+      <span class="logo-lg"><img alt="tatari" src="<?php echo base_url();?>uploads/logo/tat-big.png ?>" class="brand-logo" style="width:140px;"> <b></b></span>
     
     </a>
 
@@ -46,41 +60,44 @@ if(!is_null($role_user)){
         <?php } ?>  
             
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">     
-		 
+        <ul class="nav navbar-nav">    
+          
+        <?php if($system[0]->module_language=='true'){?>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true" title="Configurations">
-                  <i class="fa fa-qrcode"></i>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true" title="<?php echo $this->lang->line('tat_languages');?>">
+                <i class="fa fa-language"> </i> <?php echo $this->lang->line('tat_lang');?>
                 </a>
+                <ul class="dropdown-menu ">
+                <?php $languages = $this->Tat_model->all_languages();?>
+				        <?php foreach($languages as $lang):?>
+              
+                  <li role="presentation">
+                  <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/dashboard/set_language/').$lang->language_code;?>"><i class="fa fa-globe"></i><?php echo $lang->language_name;?></a></li>
+                  <?php endforeach;?>
+                </ul>
               </li>
-       
-         
+            <?php } ?>  
+
+
            <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true" title="My Profile">
               <i class="glyphicon glyphicon-user"></i>
             </a>
             <ul class="dropdown-menu">
               	<li role="presentation">
-                  <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/profile');?>"> <i class="ion ion-person"></i>My Profile</a></li>
-                 
-                  <?php if(in_array('60',$role_resources_ids)) { ?>
-                  <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href=""> <i class="ion ion-settings"></i>Settings</a></li>
-                  <?php } ?>
+                  <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/profile');?>"> <i class="ion ion-person text-green"></i>My Profile</a></li>
                   
                   <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/profile?change_password=true');?>"> <i class="fa fa-key"></i><?php echo $this->lang->line('header_change_password');?></a></li>
+                  <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/profile?change_password=true');?>"> <i class="fa fa-key text-yellow"></i><?php echo $this->lang->line('header_change_password');?></a></li>
                   <li class="divider"></li>
                   <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/auth/lock');?>"> <i class="fa fa-lock"></i><?php echo $this->lang->line('tat_lock_user');?></a></li>
+                  <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/auth/lock');?>"> <i class="fa fa-lock text-purple"></i><?php echo $this->lang->line('tat_lock_user');?></a></li>
                   <li role="presentation">
                   <a role="menuitem" tabindex="-1" href="<?php echo site_url('admin/logout');?>"> <i class="fa fa-power-off text-red"></i><?php echo $this->lang->line('header_sign_out');?></a></li>
                   </ul>
                 </li>
           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar" title="Layout Settings"><i class="fa fa-cog fa-spin"></i></a>
-          </li>
+         
         </ul>
       </div>
     </nav>

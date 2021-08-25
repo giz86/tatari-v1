@@ -81,9 +81,9 @@
 		$u_file = base_url().'uploads/profile/'.$employee->profile_picture;
 	} else {
 		if($employee->gender=='Male') { 
-			$u_file = base_url().'uploads/profile/default_male.jpg';
+			$u_file = base_url().'uploads/profile/default_male.png';
 		} else {
-			$u_file = base_url().'uploads/profile/default_female.jpg';
+			$u_file = base_url().'uploads/profile/default_female.png';
 		}
 	}
 	?>

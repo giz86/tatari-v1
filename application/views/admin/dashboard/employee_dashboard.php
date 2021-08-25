@@ -51,7 +51,6 @@ $new_date = date('d-M-Y', $strtotime);
 // Work Shift
 $u_shift = $this->Attendance_model->read_office_shift_information($user_info[0]->office_shift_id);
 
-
 //  Recieve ClockIn/ClockOut actions 
 if($day == 'Monday') {
 	if($u_shift[0]->monday_in_time==''){
@@ -137,9 +136,6 @@ if($attendances->num_rows() < 1) {
 	$bgatt = 'bg-danger';
 }
 ?>
-
-
-
 <div class="row <?php echo $get_animate;?>">
   <div class="col-md-4">
     <div class="nav-tabs-custom">
@@ -150,7 +146,7 @@ if($attendances->num_rows() < 1) {
       <div class="tab-content">
         <div class="tab-pane active" id="tab_1">
           <div class="box-widget widget-user"> 
-         
+            <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header <?php echo $bgatt;?> bg-darken-2">
               <h3 class="widget-user-username"><?php echo $user_info[0]->first_name. ' ' .$user_info[0]->last_name;?> </h3>
               <h5 class="widget-user-desc"><?php echo $designation_name;?></h5>
@@ -163,7 +159,7 @@ if($attendances->num_rows() < 1) {
                     <p class="text-muted pb-0-5"><?php echo $this->lang->line('dashboard_last_login');?>: <?php echo $this->Tat_model->set_date_format($user_info[0]->last_login_date).' '.$last_login->format('h:i a');?></p>
                     <p class="text-muted pb-0-5"><?php echo $office_shift;?></p>
                   </div>
-               
+                  <!-- /.description-block --> 
                 </div>
               </div>
               <div class="row">
@@ -215,8 +211,6 @@ if($attendances->num_rows() < 1) {
           </div>
         </div>
         <!-- /.tab-pane -->
-
-        
         <div class="tab-pane" id="tab_2">
           <?php
                 $date = strtotime(date("Y-m-d"));
@@ -239,6 +233,8 @@ if($attendances->num_rows() < 1) {
 					$user_id = $r[0]->user_id;
 					$office_shift_id = $r[0]->office_shift_id;
 					$attendance_status = '';
+					// get holiday
+					
 					
 					// get leave/employee
 					$leave_date_chck = $this->Attendance_model->leave_date_check($user_id,$attendance_date);
@@ -260,7 +256,7 @@ if($attendances->num_rows() < 1) {
 					}
 					$office_shift = $this->Attendance_model->read_office_shift_information($office_shift_id);
 					$check = $this->Attendance_model->attendance_first_in_check($user_id,$attendance_date);
-			
+					// get holiday>events
 					if($office_shift[0]->monday_in_time == '' && $day == 'Monday') {
 						$status = 'H';	
 						$pcount += 0;
@@ -334,7 +330,7 @@ if($attendances->num_rows() < 1) {
                     </tr>
                     <?php if(in_array('261',$role_resources_ids)) { ?>
                     <tr>
-                      <th scope="row" colspan="2" style="text-align: center;"><a href=""><?php echo $this->lang->line('tat_attendance_cal_view');?></a></th>
+                      <th scope="row" colspan="2" style="text-align: center;"><a href="<?php echo site_url('admin/attendance/timecalendar/');?>"><?php echo $this->lang->line('tat_attendance_cal_view');?></a></th>
                     </tr>
                     <?php } ?>
                   </tbody>

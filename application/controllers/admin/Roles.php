@@ -93,7 +93,7 @@ class Roles extends MY_Controller {
 			}
 
 		   $data[] = array(
-				// $roleAccess,
+				$roleAccess,
 				$r->role_id,
 				$r->role_name,
 				$r_access,

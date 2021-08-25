@@ -1,5 +1,8 @@
 <?php $company = $this->Tat_model->read_company_setting_info(1);?>
+
 <?php $favicon = base_url().'uploads/logo/favicon/'.$company[0]->favicon;?>
+
+
 <?php $theme = $this->Tat_model->read_theme_info(1);?>
 <!DOCTYPE html>
 <html>
@@ -9,7 +12,7 @@
 <title><?php echo $title;?></title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<link rel="icon" type="image/x-icon" href="">
+<link rel="icon" type="image/x-icon" href="<?php echo $favicon;?>" >
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet" href="<?php echo base_url();?>assets/tatari_assets/theme_assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->

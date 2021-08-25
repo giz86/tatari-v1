@@ -2,7 +2,7 @@
 <?php $company = $this->Tat_model->read_company_setting_info(1);?>
 <?php $site_lang = $this->load->helper('language');?>
 <?php $current_lang = $site_lang->session->userdata('site_lang');?>
-<?php $favicon = base_url().'uploads/logo/favicon/'?>
+<?php $favicon = base_url().'uploads/logo/favicon/fav1.png'?>
 
 <?php
 $session = $this->session->userdata('username');
@@ -73,9 +73,9 @@ echo $auth_bg;
               <div class="headline">
                 <!-- brand-logo start -->
                 <div class="brand-logo">
-                  <img src="" alt="ታታሪ">
+                  <img src="<?php echo base_url();?>uploads/logo/tatari_1.png ?>" alt="ታታሪ" width="200" height="200s">
                 </div><!-- ./brand-logo -->
-                <p>Tatari System Prototype</p>
+                <!-- <p>Tatari System Prototype</p> -->
               </div>
             </div>
           </div>
