@@ -331,4 +331,108 @@ if ( ! function_exists('employee_leave_halfday_cal'))
 		}
 	}
 }
+
+if ( ! function_exists('last_client_invoice_info'))
+{
+	function last_client_invoice_info() {
+		$CI =&	get_instance();
+		$sql = 'SELECT * FROM tat_tatari_invoices order by invoice_id desc limit 1';
+		$query = $CI->db->query($sql);		
+		if ($query->num_rows() > 0) {
+			$inv = $query->result();
+			if(!is_null($inv)) {
+				return $invid = $inv[0]->invoice_id;
+			} else {
+				return $invid = 0;
+			}
+		} else {
+			return $invid = 0;
+		}
+	}
+}
+
+
+if ( ! function_exists('all_invoice_paid_count'))
+{
+	function all_invoice_paid_count() {
+		$CI =&	get_instance();
+		$CI->db->from('tat_tatari_invoices');
+		$CI->db->where('status',1);
+		$query=$CI->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->num_rows();
+		}else{
+			return 0;
+		}
+	}
+}
+
+if ( ! function_exists('all_invoice_unpaid_count'))
+{
+	function all_invoice_unpaid_count() {
+		$CI =&	get_instance();
+		$CI->db->from('tat_tatari_invoices');
+		$CI->db->where('status',0);
+		$query=$CI->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->num_rows();
+		}else{
+			return 0;
+		}
+	}
+}
+
+if ( ! function_exists('all_invoice_paid_amount'))
+{
+	function all_invoice_paid_amount() {
+		$CI =&	get_instance();
+		$CI->db->from('tat_tatari_invoices');
+		$CI->db->where('status',1);
+		$query=$CI->db->get();
+		if ($query->num_rows() > 0) {
+			$result = $query->result();
+			$tinc = 0;
+			foreach($result as $inc){
+				$tinc += $inc->grand_total;
+			}
+			return $tinc;
+		}else{
+			return 0;
+		}
+	}
+}
+
+if ( ! function_exists('all_invoice_unpaid_amount'))
+{
+	function all_invoice_unpaid_amount() {
+		$CI =&	get_instance();
+		$CI->db->from('tat_tatari_invoices');
+		$CI->db->where('status',0);
+		$query=$CI->db->get();
+		if ($query->num_rows() > 0) {
+			$result = $query->result();
+			$tinc = 0;
+			foreach($result as $inc){
+				$tinc += $inc->grand_total;
+			}
+			return $tinc;
+		}else{
+			return 0;
+		}
+	}
+}
+
+if ( ! function_exists('get_invoice_transaction_record'))
+{
+	function get_invoice_transaction_record($id) {
+		$CI =&	get_instance();
+		$CI->db->from('tat_finance_transaction');
+		$CI->db->where('transaction_type','income');
+		$CI->db->where('invoice_id',$id);
+		$query=$CI->db->get();
+		return $query;
+	}
+}
+
+
 ?>

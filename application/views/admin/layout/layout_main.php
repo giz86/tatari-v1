@@ -59,9 +59,7 @@ if(!is_null($role_user)){
     <!-- /.sidebar -->
     <div class="sidebar-footer">
 		<?php  if(in_array('60',$role_resources_ids)) { ?>
-        <!-- item-->
-		<a href="" class="link" data-toggle="tooltip" title="" data-original-title="Config"><i class="fa fa-cog fa-spin"></i></a>
-        <?php } else {?>
+
         <a href="<?php echo site_url('admin/dashboard');?>" class="link" data-toggle="tooltip" title="" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a>
         <?php } ?>
 		<!-- item-->

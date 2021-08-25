@@ -75,9 +75,9 @@ $iresult = $this->Login_model->read_user_info_session_id($session_id['user_id'])
               <img src="<?php  echo base_url().'uploads/profile/'.$iresult[0]->profile_picture;?>" alt="unlock-user" class="img-circle">
               <?php } else {?>
               <?php  if($iresult[0]->gender=='Male') { ?>
-              <?php 	$de_file = base_url().'uploads/profile/default_male.jpg';?>
+              <?php 	$de_file = base_url().'uploads/profile/default_male.png';?>
               <?php } else { ?>
-              <?php 	$de_file = base_url().'uploads/profile/default_female.jpg';?>
+              <?php 	$de_file = base_url().'uploads/profile/default_female.png';?>
               <?php } ?>
               <img src="<?php  echo $de_file;?>" alt="unlock-user" class="img-circle">
               <?php  } ?>

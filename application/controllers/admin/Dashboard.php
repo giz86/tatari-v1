@@ -15,6 +15,7 @@ class Dashboard extends MY_Controller {
 		  $this->load->model('Tat_model');
 		  $this->load->model('Aux_model');
 		  $this->load->model('Attendance_model');
+		  $this->load->model('Expense_model');
      }
 	
 

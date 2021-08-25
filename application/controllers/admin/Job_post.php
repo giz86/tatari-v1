@@ -119,7 +119,7 @@ class Job_post extends MY_Controller {
 	
 
 
-		$combhr = $edit.$view.$delete;
+		$combhr = $edit.$delete;
 		$app_row = $this->Job_post_model->job_applications_available($r->job_id);
 		if($app_row > 0) {
 			$app_available = '<br><a class="badge bg-purple btn-xs" href="'.site_url('admin/job_candidates/').'by_job/'.$r->job_id.'" target="_blank"><i class="fa fa-list"></i> '.$this->lang->line('tat_job_applicants_title').'</a>';

@@ -64,7 +64,7 @@ endif;
   <div class="login-box-body">
     <div class="login-logo"> 
       <!--<b style="color:#FFF;"><?php echo $company[0]->company_name;?></b>tat--> 
-      <img src="<?php echo base_url();?>uploads/logo/signin/<?php echo $company[0]->sign_in_logo;?>" alt="tatari logo"> </div>
+      <img src="<?php echo base_url();?>uploads/logo/tatforgot.png" alt="tatari logo"> </div>
     <p class="login-box-msg"><?php echo $this->lang->line('tat_reset_password_hr');?></p>
 
     <?php $attributes = array('name' => 'tat-form', 'id' => 'tat-form', 'class' => 'form-tatari', 'autocomplete' => 'off');?>

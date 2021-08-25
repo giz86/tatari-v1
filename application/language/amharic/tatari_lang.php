@@ -1,7 +1,6 @@
-ነኡስ የስራ ክፍል<?php
+<?php
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 
 // Dashboard
 $lang['dashboard_title'] = 'ዳሽቦርድ';
@@ -48,11 +47,11 @@ $lang['left_warnings'] = 'ማስጠንቀቂያ';
 $lang['left_promotions'] = 'የሰራ እደገት';
 $lang['left_terminations'] = 'የተቆረጡ';
 $lang['left_employees_last_login'] = 'መጨረሻ የተገባበት';
-$lang['left_attendances'] = 'አቴዳንስ';
-$lang['left_attendance'] = 'የ የቀን አቴዳንስ ';
-$lang['left_date_wise_attendance'] = 'የቀናቶች አቴዳንስ ';
-$lang['left_update_attendance'] = 'አቴዳንሱን አዘመን';
-$lang['left_import_attendance'] = 'አቴዳንሱን ያስገቡ';
+$lang['left_attendances'] = 'Attendances';
+$lang['left_attendance'] = 'Daily Attendance';
+$lang['left_date_wise_attendance'] = 'Date-wise Attendance';
+$lang['left_update_attendance'] = 'Update Attendance';
+$lang['left_import_attendance'] = 'Import Attendance';
 $lang['left_leaves'] = 'የሽራ አረፍቶች';
 $lang['left_leave'] = 'የስራ አረፍት';
 $lang['left_work_shifts'] = 'የሰራ ፈረቃዎች';
@@ -60,7 +59,7 @@ $lang['left_work_shift'] = 'ፈረቃ';
 $lang['tat_manage_leaves'] = 'አረፍቶች';
 $lang['tat_overtime_request'] = 'ተጨማሪ የስራ ሰሃት መጠየቂያ';
 $lang['tat_month_timesheet_title'] = 'ወራዊ የጊዜ ሴሌዳ';
-$lang['left_payroll'] = 'የደሞዝ ክፍያ';
+	$lang['left_payroll'] = 'የደሞዝ ክፍያ';
 $lang['left_payroll_models'] = 'የደሞዝ ክፍያ አይነቶች';
 $lang['left_hourly_wages'] = 'የሰአት ደሞዝ';
 $lang['left_manage_salary'] = 'ደመወዝ ማስተዳደሪያ';
@@ -86,7 +85,7 @@ $lang['header_view_all_leave'] = 'ሁሉንም የስራ ፍቃዶች ይዩ';
 /* ALL MODULES */
 
 // COMPANY
-
+$lang['tat_lang'] = 'ቋንቋ';
 $lang['module_company_title'] = 'ኩባንያ';
 $lang['tat_view_company'] = 'ኩባንያውን ይዩ';
 $lang['tat_error_name_field'] = "ሰም ያስፈለጋል.";
@@ -196,6 +195,7 @@ $lang['tat_success_add_designation'] = 'ስያሜው ተጨምሮል.';
 $lang['tat_success_update_designation'] = 'ስያሜው ዘምኖል.';
 $lang['tat_success_delete_designation'] = 'ስያሜው ተሰርዞል.';
 $lang['tat_designation'] = 'ስያሜ';
+$lang['left_designation'] = 'ስያሜ';
 $lang['tat_designation_name'] = 'ስያሜ ስም';
 $lang['tat_designation_edit'] = 'ስያሜውን ያስተካክሉ';
 
@@ -1064,7 +1064,7 @@ $lang['tat_is_half_monthly_bs_only'] = 'Basic Salary Only';
 $lang['tat_half_deduct_month'] = 'Deduct Options';
 $lang['tat_is_half_monthly_bs_only_both'] = 'Both Basic Salary and Others Options';
 $lang['tat_half_monthly'] = 'Half Monthly';
-$lang['tat_overtime_request'] = 'ተጨማሪ የስራ ስዓት መጠየቂያ';
+$lang['tat_overtime_request'] = 'Overtime Request';
 $lang['tat_overtime_thours'] = 'Total Hours';
 $lang['tat_edit_request_attendance_for'] = 'Edit Request for';
 $lang['tat_error_request_attendance_date'] = 'The date field is required.';

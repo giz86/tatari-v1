@@ -79,7 +79,7 @@ class Job_candidates extends MY_Controller {
                 } else {
                     $app_available = '';
                 }
-                $job_title = '<a href="'.site_url().'vacancy	/detail/'.$job[0]->job_url.'" target="_blank" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$this->lang->line('tat_view').'">'.$job[0]->job_title.'</a>';
+                $job_title = $job[0]->job_title;
                 $job_title = $job_title.$app_available;
             } else {
                 $job_title = '-';	

@@ -105,7 +105,6 @@ $(document).ready(function(){
 <script type="text/javascript" src="<?php echo base_url();?>assets/tatari_assets/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/tatari_assets/js/buttons.flash.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/tatari_assets/js/jszip.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/tatari_assets/js/pdfmake.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/tatari_assets/js/vfs_fonts.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/tatari_assets/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/tatari_assets/js/buttons.print.min.js"></script>
@@ -125,6 +124,82 @@ $(document).ready(function(){
     <script src="<?php echo base_url();?>assets/tatari_assets/scripts/xchart/employee_department.js" type="text/javascript"></script>
     <script src="<?php echo base_url();?>assets/tatari_assets/scripts/xchart/employee_designation.js" type="text/javascript"></script>
 <?php endif; ?>
+
+<?php if($this->router->fetch_class() =='roles') { ?>
+<script type="text/javascript" src="<?php echo base_url();?>assets/tatari_assets/vendor/kendo/kendo.all.min.js"></script>
+<?php $this->load->view('admin/roles/role_values');?>
+<?php } ?>
+
+<script src="<?php echo base_url();?>assets/tatari_assets/vendor/libs/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+<?php if($this->router->fetch_class() =='invoices'  && ($this->router->fetch_method() =='create' || $this->router->fetch_method() =='edit')) { ?>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#add-invoice-item').click(function () {
+        var invoice_items = '<div class="row item-row">'
+					+'<hr>'
+					+'<div class="form-group mb-1 col-sm-12 col-md-3">'
+					+'<label for="item_name"><?php echo $this->lang->line('tat_title_item');?></label>'
+					+'<br>'
+					+'<input type="text" class="form-control item_name" name="item_name[]" id="item_name" placeholder="Item Name">'
+					+'</div>'
+					+'<div class="form-group mb-1 col-sm-12 col-md-2">'
+					+'<label for="tax_type"><?php echo $this->lang->line('tat_invoice_tax_type');?></label>'
+					+'<br>'
+					+'<select class="form-control tax_type" name="tax_type[]" id="tax_type">'
+					<?php foreach($all_taxes as $_tax){?>
+					<?php
+						if($_tax->type=='percentage') {
+							$_tax_type = $_tax->rate.'%';
+						} else {
+							$_tax_type = $this->Tat_model->currency_sign($_tax->rate);
+						}
+					?>
+					+'<option tax-type="<?php echo $_tax->type;?>" tax-rate="<?php echo $_tax->rate;?>" value="<?php echo $_tax->tax_id;?>"> <?php echo $_tax->name;?> (<?php echo $_tax_type;?>)</option>'
+					<?php } ?>
+				  	+'</select>'
+					+'</div>' 
+					+'<div class="form-group mb-1 col-sm-12 col-md-1">'
+					+'<label for="tax_type"><?php echo $this->lang->line('tat_title_tax_rate');?></label>'
+					+'<br>'
+					+'<input type="text" readonly="readonly" class="form-control tax-rate-item" name="tax_rate_item[]" value="0" />'
+					+'</div>'
+					+'<div class="form-group mb-1 col-sm-12 col-md-1">'
+					+'<label for="qty_hrs" class="cursor-pointer"><?php echo $this->lang->line('tat_title_qty_hrs');?></label>'
+					+'<br>'
+					+'<input type="text" class="form-control qty_hrs" name="qty_hrs[]" id="qty_hrs" value="1">'
+					+'</div>'
+					+'<div class="skin skin-flat form-group mb-1 col-sm-12 col-md-2">'
+					+'<label for="unit_price"><?php echo $this->lang->line('tat_title_unit_price');?></label>'
+					+'<br>'
+					+'<input class="form-control unit_price" type="text" name="unit_price[]" value="0" id="unit_price" />'
+					+'</div>'
+					+'<div class="form-group mb-1 col-sm-12 col-md-2">'
+					+'<label for="profession"><?php echo $this->lang->line('tat_title_sub_total');?></label>'
+					+'<input type="text" class="form-control sub-total-item" readonly="readonly" name="sub_total_item[]" value="0" />'
+					+'<p style="display:none" class="form-control-static"><span class="amount-html">0</span></p>'
+					+'</div>'
+					+'<div class="form-group col-sm-12 col-md-1 text-xs-center mt-2">'
+					+'<label for="profession">&nbsp;</label><br><button type="button" class="btn icon-btn btn-xs btn-danger waves-effect waves-light remove-invoice-item" data-repeater-delete=""> <span class="fa fa-trash"></span></button>'
+					+'</div>'
+				  	+'</div>'
+
+        $('#item-list').append(invoice_items).fadeIn(500);
+
+    });
+});	
+</script>
+<?php } ?>
+
+<?php if($this->router->fetch_class() =='invoices' && $this->router->fetch_method() =='view') { ?>
+<script type="text/javascript" src="<?php echo base_url();?>assets/tatari_assets/vendor/printThis.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.print-invoice').click(function () {
+		$("#print_invoice_hr").printThis();
+	});	
+});
+</script>
+<?php } ?>
 
 <script>
   function testAnim(x) {

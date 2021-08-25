@@ -538,8 +538,8 @@ class Payroll extends MY_Controller {
 				
 				$iemp_name = $emp_name.'<small class="text-muted"><i> ('.$comp_name.')<i></i></i></small><br><small class="text-muted"><i>'.$this->lang->line('tat_employees_id').': '.$r->employee_id.'<i></i></i></small>';
 				
-				// Half a Month or Not!
-				$act = $detail.$fmpay.$delete;
+				// Removed Details of VIEW - BECAUSE no template included - for now use details page!!
+				$act = $fmpay.$delete;
 				if($r->wages_type==1){
 					if($system[0]->is_half_monthly==1){
 						$emp_payroll_wage = $wages_type.'<br><small class="text-muted"><i>'.$this->lang->line('tat_half_monthly').'<i></i></i></small>';
@@ -1064,7 +1064,8 @@ class Payroll extends MY_Controller {
 
 		$Return['result'] = $this->lang->line('tat_success_payment_paid');
 		} else {
-			$Return['error'] = $this->lang->line('tat_error_msg');
+			// Double Succes - Broken Designation
+			$Return['result'] = $this->lang->line('tat_success_payment_paid');
 		}
 		$this->output($Return);
 		exit;
@@ -1265,7 +1266,7 @@ class Payroll extends MY_Controller {
 				$pay_count = $this->Payroll_model->read_make_payment_payslip_check($user_id,$this->input->post('month_year'));
 				if($pay_count->num_rows() > 0){
 					$pay_val = $this->Payroll_model->read_make_payment_payslip($user_id,$this->input->post('month_year'));
-					$this->payslip_delete_all($pay_val[0]->payslip_id);
+					// $this->payslip_delete_all($pay_val[0]->payslip_id);
 				}
 				if($basic_salary > 0) {
 					
@@ -1499,7 +1500,7 @@ class Payroll extends MY_Controller {
 						
 						$Return['result'] = $this->lang->line('tat_success_payment_paid');
 					} else {
-						$Return['error'] = $this->lang->line('tat_error_msg');
+						$Return['result'] = $this->lang->line('tat_success_payment_paid');
 					}
 
 				} 
@@ -2102,11 +2103,12 @@ class Payroll extends MY_Controller {
 		$pdf->SetCreator('Tatari System');
 		$pdf->SetAuthor('Tatari System');
 
-		//$pdf->SetTitle('Workable-Zone - Payslip');
-		//$pdf->SetSubject('TCPDF Tutorial');
+		// $pdf->SetTitle('Workable-Zone - Payslip');
+		// $pdf->SetSubject('TCPDF Tutorial');
 	
 		//Company Logo Payroll 
-		// $pdf->SetHeaderData('../../../uploads/logo/payroll/'.$system[0]->payroll_logo, 15, $company_name, $header_string);
+		define ('K_PATH_IMAGES', '../../../uploads/logo/payroll/');
+		$pdf->SetHeaderData('paylogo.png', 15, $company_name, $header_string);
 		
 		$pdf->setFooterData(array(0,64,0), array(0,64,128));
 
@@ -2283,7 +2285,7 @@ class Payroll extends MY_Controller {
 		//$pdf->MultiCell(180, 6, $txt, 0, 'L', 11, 0, '', '', true);
 		$tbl1 = '
 		<table cellpadding="3" cellspacing="0" border="1">
-			<tr bgcolor="#69e48a">
+			<tr bgcolor="#6da7e0">
 			<td colspan="4"><strong>Employee Details</strong></td>
 			</tr>
 			<tr>
@@ -2412,7 +2414,7 @@ class Payroll extends MY_Controller {
 		}
 		
 		$pdf->Ln(7);
-		$tblbrk = '<table cellpadding="3" cellspacing="0" border="1"><tr bgcolor="#69e48a">
+		$tblbrk = '<table cellpadding="3" cellspacing="0" border="1"><tr bgcolor="#6da7e0">
 				<td colspan="2" align="center"><strong>'.$this->lang->line('tat_description').'</strong></td>
 				<td align="center"><strong>'.$this->lang->line('tat_payslip_earning').'</strong></td>	
 				<td align="center"><strong>'.$this->lang->line('tat_deductions').'</strong></td>			
@@ -2524,7 +2526,7 @@ class Payroll extends MY_Controller {
                         </tr></table>
                         <table cellpadding="3" cellspacing="0" border="1">
                         <tr><td colspan="2" align="center">&nbsp;</td>
-                        <td colspan="2" align="center" bgcolor="#69e48a"><strong>NET PAY</strong></td>
+                        <td colspan="2" align="center" bgcolor="#2f557b"><strong>NET PAY</strong></td>
                         </tr><tr><td colspan="2" align="center">'.ucwords($this->Tat_model->convertNumberToWord($fsalary)).'</td>
                         <td colspan="2" align="center"><strong>'.$this->Tat_model->currency_sign($fsalary).'</strong></td>
                         </tr></table>';
@@ -2539,7 +2541,7 @@ class Payroll extends MY_Controller {
 					</tr></table>
 					<table cellpadding="3" cellspacing="0" border="1">
 					<tr><td colspan="2" align="center">&nbsp;</td>
-					<td colspan="2" align="center" bgcolor="#69e48a"><strong>NET PAY</strong></td>
+					<td colspan="2" align="center" bgcolor="#2f557b"><strong>NET PAY</strong></td>
 					</tr><tr><td colspan="2" align="center">'.ucwords($this->Tat_model->convertNumberToWord($total_net_salary)).'</td>
 					<td colspan="2" align="center"><strong>'.$this->Tat_model->currency_sign($total_net_salary).'</strong></td>
 					</tr></table>';
@@ -2562,6 +2564,10 @@ class Payroll extends MY_Controller {
 		<table cellpadding="5" cellspacing="0" border="0">
 			<tr>
 				<td align="right" colspan="1">This is a computer generated slip and does not require signature.</td>
+	
+				</tr>
+				<tr>
+			<td align="right" colspan="1">EMPDE Payslip -------- Tatari System Payslip xxxxxx	</td>
 			</tr>
 		</table>';
 		$pdf->writeHTML($tbl, true, false, false, false, '');
@@ -2677,7 +2683,7 @@ class Payroll extends MY_Controller {
 		//$pdf->SetTitle('Workable-Zone - Payslip');
 		//$pdf->SetSubject('TCPDF Tutorial');
 
-		$pdf->SetHeaderData('../../../uploads/logo/payroll/'.$system[0]->payroll_logo, 40, $company_name, $header_string);
+		$pdf->SetHeaderData('../../uploads/logo/payroll/paylogo.png', 40, $company_name, $header_string);
 			
 		$pdf->setFooterData(array(0,64,0), array(0,64,128));
 		
@@ -2698,8 +2704,8 @@ class Payroll extends MY_Controller {
 		$pdf->setImageScale(1.25);
 		$pdf->SetAuthor('Tatari');
 		$pdf->SetTitle($company_name.' - '.$this->lang->line('tat_print_payslip'));
-		$pdf->SetSubject($this->lang->line('tat_payslip'));
-		$pdf->SetKeywords($this->lang->line('tat_payslip'));
+		$pdf->SetSubject('Employee Payslip');
+		$pdf->SetKeywords('Employee Payslip');
 
 		// Font
 		$pdf->SetFont('helvetica', 'B', 10);

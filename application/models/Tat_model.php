@@ -494,10 +494,10 @@
 		}
 		if($system_setting[0]->currency_position=='Prefix'){
 			$number = $this->money_format('%i', $number);
-			$sign_value = $sc_show.''.$number;
+			$sign_value = $sc_show.' '.$number;
 		} else {
 			$number = $this->money_format('%i', $number);
-			$sign_value = $number.''.$sc_show;
+			$sign_value = $number.' '.$sc_show;
 		}
 		
 		return $sign_value;
@@ -720,9 +720,248 @@
 			$arr['emp_ll_active'] = 'active';
 			$arr['stff_open'] = 'active';
 			return $arr;
+		} else if($mMethod=='hourly_wages') {
+			$arr['pay_hourly_active'] = 'active';
+			$arr['payrl_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='templates') {
+			$arr['pay_temp_active'] = 'active';
+			$arr['payrl_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='manage_salary') {
+			$arr['pay_mang_active'] = 'active';
+			$arr['payrl_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='generate_payslip') {
+			$arr['pay_generate_active'] = 'active';
+			$arr['payrl_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='payment_history') {
+			$arr['pay_his_active'] = 'active';
+			$arr['payrl_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='currency_converter') {
+			$arr['curren_conv_active'] = 'active';
+			$arr['payrl_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='advance_salary') {
+			$arr['pay_advn_active'] = 'active';
+			$arr['payrl_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='advance_salary_report') {
+			$arr['pay_advn_rpt_active'] = 'active';
+			$arr['payrl_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='create' && $mClass=='invoices') {
+			$arr['hr_create_inv_active'] = 'active';
+			$arr['project_open'] = 'active';
+			return $arr;
+		}else if($mMethod=='taxes' && $mClass=='invoices') {
+			$arr['hr_taxes_inv_active'] = 'active';
+			$arr['project_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='payments_history' && $mClass=='invoices') {
+			$arr['hr_client_invoices_pay_active'] = 'active';
+			$arr['hr_quote_manager_open'] = 'active';
+			return $arr;
+		} else if($mClass=='invoices') {
+			$arr['hr_all_inv_active'] = 'active';
+			$arr['hr_quote_manager_open'] = 'active';
+			return $arr;
+		} else if($mClass=='job_post' && $mMethod=='pages') {
+			$arr['jb_pages_active'] = 'active';
+			$arr['recruit_open'] = 'active';
+			return $arr;
+		} else if($mClass=='job_post' && $mMethod=='employer') {
+			$arr['jb_emp_active'] = 'active';
+			$arr['recruit_open'] = 'active';
+			return $arr;
+		} else if($mClass=='job_post') {
+			$arr['jb_post_active'] = 'active';
+			$arr['recruit_open'] = 'active';
+			return $arr;
+		} else if($mClass=='job_candidates') {
+			$arr['jb_cand_active'] = 'active';
+			$arr['recruit_open'] = 'active';
+			return $arr;
+		} else if($mClass=='users') {
+			$arr['users_active'] = 'active';
+			$arr['system_open'] = 'active';
+			return $arr;
+		} else if($mClass=='roles') {
+			$arr['roles_active'] = 'active';
+			$arr['stff_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='database_backup' && $mClass=='settings') {
+			$arr['db_active'] = 'active';
+			$arr['system_open'] = 'active';
+			return $arr;
+		} else if($mMethod=='modules' && $mClass=='settings') {
+			$arr['modules_active'] = 'active';
+			$arr['system_open'] = 'active';
+			return $arr;
+		} else if($mClass=='theme') {
+			$arr['theme_active'] = 'active';
+			$arr['system_open'] = 'active';
+			return $arr;
+		} else if($mClass=='settings') {
+			$arr['settings_active'] = 'active';
+			$arr['system_open'] = 'active';
+			return $arr;
+		} else if($mClass=='languages') {
+			$arr['languages_active'] = 'active';
+			$arr['system_open'] = 'active';
+			return $arr;
+		}else if($mClass=='reports'  && $mMethod=='employee_leave') {
+			$arr['reports_leave_active'] = 'active';
+			$arr['reports_open'] = 'active';
+			return $arr;
+		} else if($mClass=='reports'  && $mMethod=='payslip') {
+			$arr['reports_payslip_active'] = 'active';
+			$arr['reports_open'] = 'active';
+			return $arr;
+		} else if($mClass=='reports'  && $mMethod=='employee_attendance') {
+			$arr['reports_employee_attendance_active'] = 'active';
+			$arr['reports_open'] = 'active';
+			return $arr;
+		} else if($mClass=='reports'  && $mMethod=='roles') {
+			$arr['reports_roles_active'] = 'active';
+			$arr['reports_open'] = 'active';
+			return $arr;
+		} else if($mClass=='reports'  && $mMethod=='employees') {
+			$arr['reports_employees_active'] = 'active';
+			$arr['reports_open'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='transfer') {
+			$arr['hr_transfer_active'] = 'active';
+			$arr['mylink_open'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='promotion') {
+			$arr['hr_promotion_active'] = 'active';
+			$arr['mylink_open'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='complaints') {
+			$arr['hr_complaints_active'] = 'active';
+			$arr['mylink_open'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='warning') {
+			$arr['hr_warning_active'] = 'active';
+			$arr['mylink_open'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='office_shift') {
+			$arr['hr_office_shift_active'] = 'active';
+			$arr['mylink_open'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='jobs_applied') {
+			$arr['jobs_applied_active'] = 'active';
+			$arr['rec_open'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='jobs_interviews') {
+			$arr['jobs_interviews_active'] = 'active';
+			$arr['rec_open'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='payslip') {
+			$arr['hr_payslip_active'] = 'active';
+			$arr['hr_payslip_open'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='advance_salary') {
+			$arr['hr_advance_salary_active'] = 'active';
+			$arr['hr_payslip_open'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='advance_salary_report') {
+			$arr['hr_advance_salary_report_active'] = 'active';
+			$arr['hr_payslip_open'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='attendance') {
+			$arr['hr_attendance_active'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='attendance') {
+			$arr['hr_attendance_active'] = 'active';
+			return $arr;
+		} else if($mClass=='user' && $mMethod=='expense_claims') {
+			$arr['hr_expense_claims_active'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='bank_cash') {
+			$arr['hr_bank_cash_active'] = 'active';
+			$arr['hr_acc_open1'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='account_balances') {
+			$arr['hr_account_balances_active'] = 'active';
+			$arr['hr_acc_open1'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='transfer') {
+			$arr['hr_account_transfer_active'] = 'active';
+			$arr['hr_acc_open3'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='deposit') {
+			$arr['hr_deposit_active'] = 'active';
+			$arr['hr_acc_open3'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='expense') {
+			$arr['hr_account_expense_active'] = 'active';
+			$arr['hr_acc_open3'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='transactions') {
+			$arr['hr_account_transactions_active'] = 'active';
+			$arr['hr_acc_open3'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='bankwise_transactions') {
+			$arr['hr_account_transactions_active'] = 'active';
+			$arr['hr_acc_open3'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='payees') {
+			$arr['hr_payees_active'] = 'active';
+			$arr['hr_acc_open2'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='payers') {
+			$arr['hr_payers_active'] = 'active';
+			$arr['hr_acc_open2'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='account_statement') {
+			$arr['hr_account_statement_active'] = 'active';
+			$arr['hr_acc_open5'] = 'active';
+			$arr['hr_acc_report_open'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='expense_report') {
+			$arr['hr_expense_report_active'] = 'active';
+			$arr['hr_acc_open5'] = 'active';
+			$arr['hr_acc_report_open'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='income_report') {
+			$arr['hr_income_report_active'] = 'active';
+			$arr['hr_acc_open5'] = 'active';
+			$arr['hr_acc_report_open'] = 'active';
+			return $arr;
+		} else if($mClass=='finance' && $mMethod=='transfer_report') {
+			$arr['hr_transfer_report_active'] = 'active';
+			$arr['hr_acc_open5'] = 'active';
+			$arr['hr_acc_report_open'] = 'active';
+			return $arr;
+		} else if($mClass=='profile' && isset($_GET['change_password'])=='true') {
+			$arr['hr_password_active'] = 'active';
+			return $arr;
+		} else if($mClass=='invoices' && $mClass=='payments_history') {
+			$arr['hr_client_invoices_pay_active'] = 'active';
+			return $arr;
+		} else if($mClass=='invoices') {
+			$arr['hr_client_invoices_active'] = 'active';
+			return $arr;
 		} 
 		
 		
+	}
+
+	public function read_payment_method($id) {
+	
+		$sql = 'SELECT * FROM tat_payment_method where payment_method_id = ?';
+		$binds = array($id);
+		$query = $this->db->query($sql, $binds);
+		
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return null;
+		}
 	}
 
 	public function read_user_attendance_info() {
@@ -812,6 +1051,100 @@
 	 private function validate_numbers_only($value) {
 		 return preg_match('/^([0-9]*)$/', $value);
 	 }
+
+	 public function current_month_day_attendance($current_month) {
+		
+		$session = $this->session->userdata('username');
+		$sql = 'SELECT employee_id,attendance_date FROM tat_attendance_time WHERE attendance_date = ? group by employee_id';
+		$binds = array($current_month);
+		$query = $this->db->query($sql, $binds);
+		return $query->num_rows();
+	}
+	
+	public function current_employee_absent_calendar($current_month) {
+		
+		$session = $this->session->userdata('username');		
+		$sql = "SELECT at.*,e.*,la.* from tat_attendance_time as at, tat_employees as e, tat_leave_applications as la where at.attendance_date = ? and e.user_id!=at.employee_id and e.user_id!=la.employee_id";
+		$binds = array($current_month);
+		$query = $this->db->query($sql, $binds);
+		
+		
+		return $query->result();
+	}
+
+	public function set_percentage($number){
+		if(is_int($number)) {
+			$inumber = $number;
+		} else {
+			$inumber = number_format((float)$number, 2, '.', '');
+		}
+		return $inumber;
+		
+	}
+
+	public function get_email_templates() {
+		return  $query = $this->db->query("SELECT * from tat_email_template");
+   }
+   
+
+   public function read_email_template_info($id) {
+   
+	   $sql = 'SELECT * FROM tat_email_template WHERE template_id = ?';
+	   $binds = array($id);
+	   $query = $this->db->query($sql, $binds);
+	   
+	   if ($query->num_rows() > 0) {
+		   return $query->result();
+	   } else {
+		   return null;
+	   }
+   }
+
+   public function read_email_template($id) {
+	
+	$sql = 'SELECT * FROM tat_email_template where template_id = ?';
+	$binds = array($id);
+	$query = $this->db->query($sql, $binds);
+	
+	if ($query->num_rows() > 0) {
+		return $query->result();
+	} else {
+		return null;
+	}
+}
+
+   public function single_email_template($id){
+		
+	$sql = 'SELECT * FROM tat_email_template where template_id = ?';
+	$binds = array($id);
+	$query = $this->db->query($sql, $binds);
+	return $query->result();
+}
+
+	public function add_backup($data){
+		$this->db->insert('tat_database_backup', $data);
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+	public function all_db_backup() {
+		return  $query = $this->db->query("SELECT * from tat_database_backup");
+	}
+
+	public function delete_single_backup_record($id){
+		$this->db->where('backup_id', $id);
+		$this->db->delete('tat_database_backup');
+		
+	}
+
+	public function delete_all_backup_record(){
+		$this->db->empty_table('tat_database_backup');
+		
+	}
 	
 }
 ?>
